@@ -4,6 +4,7 @@ use App\Http\Controllers\dashboard\ContainerController;
 use App\Http\Controllers\dashboard\LocationController;
 use App\Http\Controllers\dashboard\ShipmentController;
 use App\Http\Controllers\dashboard\ShipmentTrackingController;
+use App\Http\Controllers\dashboard\SliderController;
 use App\Http\Controllers\dashboard\UserController;
 use App\Http\Controllers\homeController;
 use Illuminate\Support\Facades\Route;
@@ -39,6 +40,7 @@ Route::group([], function () {
     //this route shipment_trackings
     Route::resource('shipment_trackings', ShipmentTrackingController::class);
 
-
+    //this route sliders
+    Route::resource('sliders', SliderController::class);
 
 });

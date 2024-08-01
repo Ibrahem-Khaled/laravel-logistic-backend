@@ -48,6 +48,12 @@
                     <span class="nav-link-text ms-1">إدارة التتبع</span>
                 </a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link text-white" href="{{ route('sliders.index') }}">
+                    <i class="fas fa-image me-2"></i>
+                    <span class="nav-link-text ms-1">إدارة السلايدر</span>
+                </a>
+            </li>
         </ul>
     </div>
 </aside>
