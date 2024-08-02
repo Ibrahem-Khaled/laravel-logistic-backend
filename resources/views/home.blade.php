@@ -19,22 +19,6 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-3">
-            <div class="card text-white bg-warning mb-3">
-                <div class="card-body">
-                    <h5 class="card-title">الشحنات المعلقة</h5>
-                    <p class="card-text">{{ $pendingShipments }}</p>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="card text-white bg-danger mb-3">
-                <div class="card-body">
-                    <h5 class="card-title">الشحنات الفاشلة</h5>
-                    <p class="card-text">{{ $failedDeliveries }}</p>
-                </div>
-            </div>
-        </div>
     </div>
 
     <div class="row mb-4">

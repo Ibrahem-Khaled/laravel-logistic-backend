@@ -12,8 +12,6 @@ class homeController extends Controller
     {
         $totalUsers = User::count();
         $totalShipments = Shipment::count();
-        $pendingShipments = Shipment::where('status', 'pending')->count();
-        $failedDeliveries = Shipment::where('status', 'failed')->count();
         $recentActivities = []; // يمكنك استبدالها بالأنشطة الحقيقية
 
         return view('home', compact('totalUsers', 'totalShipments', 'pendingShipments', 'failedDeliveries', 'recentActivities'));
