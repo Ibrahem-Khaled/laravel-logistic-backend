@@ -1,13 +1,11 @@
-<!-- resources/views/dashboard/users/index.blade.php -->
-
 @extends('layouts.dashboard')
 
 @section('content')
     <div class="container mt-5">
         <div class="d-flex justify-content-between align-items-center mb-3">
-            <h3>Users</h3>
+            <h3>المستخدمين</h3>
             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addUserModal">
-                Add User
+                إضافة مستخدم
             </button>
         </div>
 
@@ -21,13 +19,13 @@
             <table class="table table-striped">
                 <thead class="bg-primary text-white">
                     <tr>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Phone</th>
-                        <th>Address</th>
-                        <th>Role</th>
-                        <th>Avatar</th>
-                        <th>Actions</th>
+                        <th>الاسم</th>
+                        <th>البريد الإلكتروني</th>
+                        <th>الهاتف</th>
+                        <th>العنوان</th>
+                        <th>الدور</th>
+                        <th>الصورة الرمزية</th>
+                        <th>الإجراءات</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -40,21 +38,20 @@
                             <td>{{ $user->role }}</td>
                             <td>
                                 @if ($user->avatar)
-                                    <img src="{{ Storage::url($user->avatar) }}" alt="Avatar" style="width: 50px;">
+                                    <img src="{{ Storage::url($user->avatar) }}" alt="الصورة الرمزية" style="width: 50px;">
                                 @else
-                                    <span>No Avatar</span>
+                                    <span>لا توجد صورة</span>
                                 @endif
                             </td>
                             <td>
                                 <button type="button" class="btn btn-warning" data-bs-toggle="modal"
                                     data-bs-target="#editUserModal{{ $user->id }}">
-                                    Edit
+                                    تعديل
                                 </button>
-                                <form action="{{ route('users.destroy', $user->id) }}" method="POST" class="d-inline">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn btn-danger">Delete</button>
-                                </form>
+                                <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                                    data-bs-target="#confirmDeleteModal{{ $user->id }}">
+                                    حذف
+                                </button>
                             </td>
                         </tr>
 
@@ -64,7 +61,7 @@
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="editUserModalLabel">Edit User</h5>
+                                        <h5 class="modal-title" id="editUserModalLabel">تعديل المستخدم</h5>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                                             aria-label="Close"></button>
                                     </div>
@@ -76,9 +73,36 @@
                                             @include('dashboard.users.form', ['user' => $user])
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary"
-                                                    data-bs-dismiss="modal">Close</button>
-                                                <button type="submit" class="btn btn-primary">Save changes</button>
+                                                    data-bs-dismiss="modal">إغلاق</button>
+                                                <button type="submit" class="btn btn-primary">حفظ التغييرات</button>
                                             </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Confirm Delete Modal -->
+                        <div class="modal fade" id="confirmDeleteModal{{ $user->id }}" tabindex="-1"
+                            aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="confirmDeleteModalLabel">تأكيد الحذف</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        هل أنت متأكد أنك تريد حذف هذا المستخدم؟
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                            data-bs-dismiss="modal">إلغاء</button>
+                                        <form action="{{ route('users.destroy', $user->id) }}" method="POST"
+                                            class="d-inline">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-danger">تأكيد الحذف</button>
                                         </form>
                                     </div>
                                 </div>
@@ -98,7 +122,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="addUserModalLabel">Add User</h5>
+                    <h5 class="modal-title" id="addUserModalLabel">إضافة مستخدم</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -106,8 +130,8 @@
                         @csrf
                         @include('dashboard.users.form', ['user' => new App\Models\User()])
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary">Save changes</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إغلاق</button>
+                            <button type="submit" class="btn btn-primary">حفظ التغييرات</button>
                         </div>
                     </form>
                 </div>

@@ -21,13 +21,17 @@
                     <tr>
                         <th>المستخدم</th>
                         <th>الحاوية</th>
-                        <th>الحالة</th>
-                        <th>أماكن الشحنة</th>
+                        <th>النوع</th>
+                        <th>اماكن التتبع</th>
                         <th>رقم التتبع</th>
+                        <th>منطقة الإرسال</th>
+                        <th>منطقة الاستلام</th>
                         <th>تاريخ الإرسال</th>
                         <th>تاريخ الاستلام</th>
                         <th>الوزن</th>
-                        <th>الأبعاد</th>
+                        <th>اجمالي المتر المكعب</th>
+                        <th>سعر الفاتورة</th>
+                        <th>العدد</th>
                         <th>العد التنازلي</th>
                         <th>العمليات</th>
                     </tr>
@@ -37,7 +41,7 @@
                         <tr>
                             <td>{{ $shipment->user->name }}</td>
                             <td>{{ $shipment->container->container_number }}</td>
-                            <td>{{ __('حالة الشحن - ') . ucfirst($shipment->status) }}</td>
+                            <td>{{ $shipment->type }}</td>
                             <td>
                                 <ul>
                                     @foreach ($shipment->container->location as $tracking)
@@ -46,10 +50,14 @@
                                 </ul>
                             </td>
                             <td>{{ $shipment->tracking_number }}</td>
+                            <td>{{ $shipment->sent_area }}</td>
+                            <td>{{ $shipment->delivered_area }}</td>
                             <td>{{ $shipment->sent_date }}</td>
                             <td>{{ $shipment->delivered_date }}</td>
                             <td>{{ $shipment->weight }}</td>
                             <td>{{ $shipment->dimensions }}</td>
+                            <td>{{ $shipment->price }}</td>
+                            <td>{{ $shipment->shipment_count }}</td>
                             <td>
                                 @php
                                     $deliveredDate = \Carbon\Carbon::parse($shipment->delivered_date);

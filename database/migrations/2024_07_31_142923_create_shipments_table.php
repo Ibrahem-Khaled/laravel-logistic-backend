@@ -16,12 +16,16 @@ return new class extends Migration {
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->bigInteger('container_id')->unsigned();
             $table->foreign('container_id')->references('id')->on('containers')->onDelete('cascade');
-            $table->enum('status', ['pending', 'in_transit', 'delivered', 'failed'])->default('pending');
-            $table->string('tracking_number', 50)->unique()->nullable();
+            $table->enum('type', ['aerial', 'ground', 'nautical'])->default('nautical');
+            $table->string('tracking_number', 50)->unique();
+            $table->string('sent_area');
+            $table->string('delivered_area');
             $table->timestamp('sent_date')->nullable();
             $table->timestamp('delivered_date')->nullable();
-            $table->integer('weight')->nullable();
-            $table->string('dimensions')->nullable();
+            $table->integer('weight');
+            $table->string('dimensions');
+            $table->float('price')->default(0);
+            $table->bigInteger('shipment_count')->default(0);
             $table->timestamps();
         });
     }

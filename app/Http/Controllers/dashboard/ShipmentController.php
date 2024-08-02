@@ -19,35 +19,42 @@ class ShipmentController extends Controller
         $request->validate([
             'user_id' => 'required|exists:users,id',
             'container_id' => 'required|exists:containers,id',
-            'status' => 'required|in:pending,in_transit,delivered,failed',
-            'tracking_number' => 'nullable|string|unique:shipments,tracking_number',
+            'type' => 'required|in:aerial,ground,nautical',
+            'tracking_number' => 'required|string|unique:shipments,tracking_number|max:50',
+            'sent_area' => 'required|string|max:255',
+            'delivered_area' => 'required|string|max:255',
             'sent_date' => 'nullable|date',
             'delivered_date' => 'nullable|date',
-            'weight' => 'nullable|integer',
-            'dimensions' => 'nullable|string',
+            'weight' => 'required|integer',
+            'dimensions' => 'required|string|max:255',
+            'price' => 'required|numeric|min:0',
+            'shipment_count' => 'required|integer|min:0',
         ]);
 
         Shipment::create($request->all());
 
-        return redirect()->route('shipments.index')->with('success', 'Shipment created successfully.');
+        return redirect()->route('shipments.index')->with('success', 'تم إضافة الشحنة بنجاح.');
     }
-
     public function update(Request $request, Shipment $shipment)
     {
         $request->validate([
             'user_id' => 'required|exists:users,id',
             'container_id' => 'required|exists:containers,id',
-            'status' => 'required|in:pending,in_transit,delivered,failed',
-            'tracking_number' => 'nullable|string|unique:shipments,tracking_number,' . $shipment->id,
+            'type' => 'required|in:aerial,ground,nautical',
+            'tracking_number' => 'required|string|unique:shipments,tracking_number,' . $shipment->id . '|max:50',
+            'sent_area' => 'required|string|max:255',
+            'delivered_area' => 'required|string|max:255',
             'sent_date' => 'nullable|date',
             'delivered_date' => 'nullable|date',
-            'weight' => 'nullable|integer',
-            'dimensions' => 'nullable|string',
+            'weight' => 'required|integer',
+            'dimensions' => 'required|string|max:255',
+            'price' => 'required|numeric|min:0',
+            'shipment_count' => 'required|integer|min:0',
         ]);
 
         $shipment->update($request->all());
 
-        return redirect()->route('shipments.index')->with('success', 'Shipment updated successfully.');
+        return redirect()->route('shipments.index')->with('success', 'تم تحديث الشحنة بنجاح.');
     }
 
     public function destroy(Shipment $shipment)
