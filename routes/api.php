@@ -29,7 +29,6 @@ Route::group([], function () {
     Route::post('shipments/search', [homeController::class, 'search']);
     Route::get('shipments/pending', [homeController::class, 'pendingShipments']);
     Route::get('shipments/delivered', [homeController::class, 'deliveredShipments']);
-
-    
+    Route::get('slides', [homeController::class, 'slides']);
 
 });

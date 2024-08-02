@@ -4,6 +4,7 @@ namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Shipment;
+use App\Models\Sliders;
 use Illuminate\Http\Request;
 
 class homeController extends Controller
@@ -55,5 +56,14 @@ class homeController extends Controller
             return response()->json('No delivered shipment found.', 404);
         }
         return response()->json($shipments, 200);
+    }
+
+    public function slides()
+    {
+        $slides = Sliders::all();
+        if ($slides->count() == 0) {
+            return response()->json('No slides found.', 404);
+        }
+        return response()->json($slides, 200);
     }
 }
