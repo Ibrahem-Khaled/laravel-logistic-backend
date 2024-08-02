@@ -4,6 +4,7 @@ namespace App\Http\Controllers\dashboard;
 
 use App\Http\Controllers\Controller;
 use App\Models\Container;
+use App\Models\Shipment;
 use Illuminate\Http\Request;
 
 class ContainerController extends Controller
@@ -14,6 +15,12 @@ class ContainerController extends Controller
         return view('dashboard.containers.index', compact('containers'));
     }
 
+    public function containerShipments($container_id)
+    {
+        $container = Container::findOrFail($container_id);
+        $shipments = Shipment::where('container_id', $container->id)->paginate(10);
+        return view('dashboard.containers.shipments', compact('container', 'shipments'));
+    }
     public function store(Request $request)
     {
         $request->validate([

@@ -16,4 +16,9 @@ class Container extends Model
     {
         return $this->hasMany(Shipment::class);
     }
+
+    public function location()
+    {
+        return $this->belongsToMany(Location::class, 'shipment_trackings', 'container_id', 'location_id');
+    }
 }

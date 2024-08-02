@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('shipment_trackings', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('shipment_id')->unsigned();
-            $table->foreign('shipment_id')->references('id')->on('shipments')->onDelete('cascade');
+            $table->bigInteger('container_id')->unsigned();
+            $table->foreign('container_id')->references('id')->on('containers')->onDelete('cascade');
             $table->bigInteger('location_id')->unsigned();
             $table->foreign('location_id')->references('id')->on('locations')->onDelete('cascade');
             $table->timestamps();

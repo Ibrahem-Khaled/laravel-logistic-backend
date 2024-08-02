@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\dashboard\ContainerController;
 use App\Http\Controllers\dashboard\LocationController;
 use App\Http\Controllers\dashboard\ShipmentController;
@@ -20,17 +21,24 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [homeController::class, 'index'])->name('home');
+Route::get('login', [AuthController::class, 'login'])->name('login');
+Route::post('login', [AuthController::class, 'customLogin'])->name('customLogin');
+Route::get('register', [AuthController::class, 'register'])->name('register');
+Route::post('register', [AuthController::class, 'customRegister'])->name('customRegister');
+Route::post('logout', [AuthController::class, 'logout'])->name('logout');
+Route::get('proflie', [AuthController::class, 'profile'])->name('proflie');
+Route::post('/profile', [AuthController::class, 'update'])->name('profile.update');
 
+Route::group(['middleware' => ['auth', 'isAdmin']], function () {
 
-Route::group([], function () {
+    Route::get('/', [homeController::class, 'index'])->name('home');
 
     //this route users
     Route::resource('users', UserController::class);
 
     //this route containers
     Route::resource('containers', ContainerController::class);
-
+    Route::get('containers/{container_id}/shipments', [ContainerController::class, 'containerShipments'])->name('containers.shipments');
     //this route shipments
     Route::resource('shipments', ShipmentController::class);
 

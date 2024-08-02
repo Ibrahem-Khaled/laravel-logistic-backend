@@ -12,8 +12,8 @@ class Location extends Model
     protected $guarded = ['id'];
 
 
-    public function shipment()
+    public function container()
     {
-        return $this->belongsToMany(Shipment::class, 'shipment_trackings', 'location_id', 'shipment_id');
+        return $this->belongsToMany(Container::class, 'shipment_trackings', 'location_id', 'container_id');
     }
 }

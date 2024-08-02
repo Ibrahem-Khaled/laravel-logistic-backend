@@ -20,9 +20,4 @@ class Shipment extends Model
     {
         return $this->belongsTo(Container::class);
     }
-
-    public function location()
-    {
-        return $this->belongsToMany(Location::class, 'shipment_trackings', 'shipment_id', 'location_id');
-    }
 }

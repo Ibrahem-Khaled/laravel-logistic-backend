@@ -29,4 +29,6 @@ Route::group([], function () {
     Route::get('shipments/pending', [homeController::class, 'pendingShipments']);
     Route::get('shipments/delivered', [homeController::class, 'deliveredShipments']);
 
+    
+
 });

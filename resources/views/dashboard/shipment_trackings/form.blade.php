@@ -2,11 +2,11 @@
 
 <div class="mb-3">
     <label for="shipment_id" class="form-label">Shipment</label>
-    <select class="form-select" id="shipment_id" name="shipment_id" required>
-        @foreach (App\Models\Shipment::all() as $shipment)
+    <select class="form-select" id="container_id" name="container_id" required>
+        @foreach (App\Models\Container::all() as $shipment)
             <option value="{{ $shipment->id }}"
-                {{ old('shipment_id', $shipmentTracking->shipment_id) == $shipment->id ? 'selected' : '' }}>
-                {{ $shipment->tracking_number }}</option>
+                {{ old('container_id', $shipmentTracking->shipment_id) == $shipment->id ? 'selected' : '' }}>
+                {{ $shipment->container_number }}</option>
         @endforeach
     </select>
 </div>

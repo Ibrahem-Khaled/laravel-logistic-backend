@@ -5,9 +5,9 @@
 @section('content')
     <div class="container mt-5">
         <div class="d-flex justify-content-between align-items-center mb-3">
-            <h3>Containers</h3>
+            <h3>الحاويات</h3>
             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addContainerModal">
-                Add Container
+                إضافة حاوية
             </button>
         </div>
 
@@ -21,39 +21,41 @@
             <table class="table table-striped">
                 <thead class="bg-primary text-white">
                     <tr>
-                        <th>Container Number</th>
-                        <th>Size</th>
-                        <th>Notes</th>
-                        <th>Actions</th>
+                        <th>رقم الحاوية</th>
+                        <th>الحجم</th>
+                        <th>الملاحظات</th>
+                        <th>العمليات</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach ($containers as $container)
                         <tr>
-                            <td>{{ $container->container_number }}</td>
+                            <td><a
+                                    href="{{ route('containers.shipments', $container->id) }}">{{ $container->container_number }}</a>
+                            </td>
                             <td>{{ $container->size }}</td>
                             <td>{{ $container->notes }}</td>
                             <td>
                                 <button type="button" class="btn btn-warning" data-bs-toggle="modal"
                                     data-bs-target="#editContainerModal{{ $container->id }}">
-                                    Edit
+                                    تعديل
                                 </button>
                                 <form action="{{ route('containers.destroy', $container->id) }}" method="POST"
                                     class="d-inline">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="btn btn-danger">Delete</button>
+                                    <button type="submit" class="btn btn-danger">حذف</button>
                                 </form>
                             </td>
                         </tr>
 
-                        <!-- Edit Container Modal -->
+                        <!-- تعديل حاوية -->
                         <div class="modal fade" id="editContainerModal{{ $container->id }}" tabindex="-1"
                             aria-labelledby="editContainerModalLabel" aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="editContainerModalLabel">Edit Container</h5>
+                                        <h5 class="modal-title" id="editContainerModalLabel">تعديل الحاوية</h5>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                                             aria-label="Close"></button>
                                     </div>
@@ -61,11 +63,13 @@
                                         <form action="{{ route('containers.update', $container->id) }}" method="POST">
                                             @csrf
                                             @method('PUT')
-                                            @include('dashboard.containers.form', ['container' => $container])
+                                            @include('dashboard.containers.form', [
+                                                'container' => $container,
+                                            ])
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary"
-                                                    data-bs-dismiss="modal">Close</button>
-                                                <button type="submit" class="btn btn-primary">Save changes</button>
+                                                    data-bs-dismiss="modal">إغلاق</button>
+                                                <button type="submit" class="btn btn-primary">حفظ التغييرات</button>
                                             </div>
                                         </form>
                                     </div>
@@ -81,13 +85,13 @@
         </div>
     </div>
 
-    <!-- Add Container Modal -->
+    <!-- إضافة حاوية -->
     <div class="modal fade" id="addContainerModal" tabindex="-1" aria-labelledby="addContainerModalLabel"
         aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="addContainerModalLabel">Add Container</h5>
+                    <h5 class="modal-title" id="addContainerModalLabel">إضافة حاوية</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -95,8 +99,8 @@
                         @csrf
                         @include('dashboard.containers.form', ['container' => new App\Models\Container()])
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary">Save changes</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إغلاق</button>
+                            <button type="submit" class="btn btn-primary">حفظ التغييرات</button>
                         </div>
                     </form>
                 </div>

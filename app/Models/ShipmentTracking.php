@@ -11,9 +11,9 @@ class ShipmentTracking extends Model
 
     protected $guarded = ['id'];
 
-    public function shipment()
+    public function container()
     {
-        return $this->belongsTo(Shipment::class);
+        return $this->belongsTo(Container::class);
     }
 
     public function location()

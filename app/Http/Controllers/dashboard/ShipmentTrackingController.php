@@ -10,14 +10,14 @@ class ShipmentTrackingController extends Controller
 {
     public function index()
     {
-        $shipmentTrackings = ShipmentTracking::with('shipment', 'location')->paginate(10);
+        $shipmentTrackings = ShipmentTracking::with('container', 'location')->paginate(10);
         return view('dashboard.shipment_trackings.index', compact('shipmentTrackings'));
     }
 
     public function store(Request $request)
     {
         $request->validate([
-            'shipment_id' => 'required|exists:shipments,id',
+            'container_id' => 'required|exists:containers,id',
             'location_id' => 'required|exists:locations,id',
         ]);
 

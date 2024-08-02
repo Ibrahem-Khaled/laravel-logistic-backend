@@ -5,9 +5,9 @@
 @section('content')
     <div class="container mt-5">
         <div class="d-flex justify-content-between align-items-center mb-3">
-            <h3>Shipment Trackings</h3>
+            <h3>تتبع الشحنات</h3>
             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addShipmentTrackingModal">
-                Add Tracking
+                إضافة تتبع
             </button>
         </div>
 
@@ -21,37 +21,37 @@
             <table class="table table-striped">
                 <thead class="bg-primary text-white">
                     <tr>
-                        <th>Shipment</th>
-                        <th>Location</th>
-                        <th>Actions</th>
+                        <th>الحاوية</th>
+                        <th>الموقع</th>
+                        <th>العمليات</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach ($shipmentTrackings as $shipmentTracking)
                         <tr>
-                            <td>{{ $shipmentTracking->shipment->tracking_number }}</td>
+                            <td>{{ $shipmentTracking->container->container_number }}</td>
                             <td>{{ $shipmentTracking->location->name }}</td>
                             <td>
                                 <button type="button" class="btn btn-warning" data-bs-toggle="modal"
                                     data-bs-target="#editShipmentTrackingModal{{ $shipmentTracking->id }}">
-                                    Edit
+                                    تعديل
                                 </button>
                                 <form action="{{ route('shipment_trackings.destroy', $shipmentTracking->id) }}"
                                     method="POST" class="d-inline">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="btn btn-danger">Delete</button>
+                                    <button type="submit" class="btn btn-danger">حذف</button>
                                 </form>
                             </td>
                         </tr>
 
-                        <!-- Edit Shipment Tracking Modal -->
+                        <!-- تعديل تتبع الشحنة -->
                         <div class="modal fade" id="editShipmentTrackingModal{{ $shipmentTracking->id }}" tabindex="-1"
                             aria-labelledby="editShipmentTrackingModalLabel" aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="editShipmentTrackingModalLabel">Edit Tracking</h5>
+                                        <h5 class="modal-title" id="editShipmentTrackingModalLabel">تعديل التتبع</h5>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                                             aria-label="Close"></button>
                                     </div>
@@ -65,8 +65,8 @@
                                             ])
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary"
-                                                    data-bs-dismiss="modal">Close</button>
-                                                <button type="submit" class="btn btn-primary">Save changes</button>
+                                                    data-bs-dismiss="modal">إغلاق</button>
+                                                <button type="submit" class="btn btn-primary">حفظ التغييرات</button>
                                             </div>
                                         </form>
                                     </div>
@@ -82,13 +82,13 @@
         </div>
     </div>
 
-    <!-- Add Shipment Tracking Modal -->
+    <!-- إضافة تتبع شحنة -->
     <div class="modal fade" id="addShipmentTrackingModal" tabindex="-1" aria-labelledby="addShipmentTrackingModalLabel"
         aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="addShipmentTrackingModalLabel">Add Tracking</h5>
+                    <h5 class="modal-title" id="addShipmentTrackingModalLabel">إضافة تتبع</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -98,8 +98,8 @@
                             'shipmentTracking' => new App\Models\ShipmentTracking(),
                         ])
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary">Save changes</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إغلاق</button>
+                            <button type="submit" class="btn btn-primary">حفظ التغييرات</button>
                         </div>
                     </form>
                 </div>
