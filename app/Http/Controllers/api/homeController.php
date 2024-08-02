@@ -11,8 +11,17 @@ class homeController extends Controller
     public function userShipments()
     {
         $user = auth()->guard('api')->user();
-        $shipments = $user->shipments()->with('location')->get();
+        $shipments = $user->shipments()->with('container.location', )->get();
         return response()->json($shipments, 200);
+    }
+
+    public function shipment($shipmentId)
+    {
+        $shipment = Shipment::with('container.location')->find($shipmentId);
+        if (!$shipment) {
+            return response()->json('Shipment not found.', 404);
+        }
+        return response()->json($shipment, 200);
     }
 
     public function search(Request $request)
@@ -21,7 +30,7 @@ class homeController extends Controller
         if (empty($q)) {
             return response()->json('Search field is required.', 400);
         }
-        $shipments = Shipment::with('user', 'container', 'location')->where('tracking_number', $q)->first();
+        $shipments = Shipment::with('user', 'container.location')->where('tracking_number', $q)->first();
         if (!$shipments) {
             return response()->json('Shipment not found.', 404);
         }
@@ -31,7 +40,7 @@ class homeController extends Controller
     public function pendingShipments()
     {
         $user = auth()->guard('api')->user();
-        $shipments = $user->shipments()->with('location')->where('status', 'pending')->get();
+        $shipments = $user->shipments()->with('container.location')->where('status', 'pending')->get();
         if ($shipments->count() == 0) {
             return response()->json('No pending shipment found.', 404);
         }
@@ -41,7 +50,7 @@ class homeController extends Controller
     public function deliveredShipments()
     {
         $user = auth()->guard('api')->user();
-        $shipments = $user->shipments()->with('location')->where('status', 'delivered')->get();
+        $shipments = $user->shipments()->with('container.location')->where('status', 'delivered')->get();
         if ($shipments->count() == 0) {
             return response()->json('No delivered shipment found.', 404);
         }

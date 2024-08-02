@@ -23,6 +23,7 @@
                     <tr>
                         <th>الحاوية</th>
                         <th>الموقع</th>
+                        <th>تاريخ الوصول</th>
                         <th>العمليات</th>
                     </tr>
                 </thead>
@@ -31,6 +32,7 @@
                         <tr>
                             <td>{{ $shipmentTracking->container->container_number }}</td>
                             <td>{{ $shipmentTracking->location->name }}</td>
+                            <td>{{ $shipmentTracking->delivered_date }}</td>
                             <td>
                                 <button type="button" class="btn btn-warning" data-bs-toggle="modal"
                                     data-bs-target="#editShipmentTrackingModal{{ $shipmentTracking->id }}">

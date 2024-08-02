@@ -25,6 +25,7 @@ Route::post('logout', [AuthController::class, 'logout']);
 Route::group([], function () {
     //this main api routes
     Route::get('shipments', [homeController::class, 'userShipments']);
+    Route::get('shipment/{id}', [homeController::class, 'shipment']);
     Route::post('shipments/search', [homeController::class, 'search']);
     Route::get('shipments/pending', [homeController::class, 'pendingShipments']);
     Route::get('shipments/delivered', [homeController::class, 'deliveredShipments']);
