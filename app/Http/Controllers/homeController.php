@@ -14,6 +14,6 @@ class homeController extends Controller
         $totalShipments = Shipment::count();
         $recentActivities = []; // يمكنك استبدالها بالأنشطة الحقيقية
 
-        return view('home', compact('totalUsers', 'totalShipments', 'pendingShipments', 'failedDeliveries', 'recentActivities'));
+        return view('home', compact('totalUsers', 'totalShipments', 'recentActivities'));
     }
 }
