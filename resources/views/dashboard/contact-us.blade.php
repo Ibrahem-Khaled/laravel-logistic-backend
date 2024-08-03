@@ -29,7 +29,7 @@
                             <td>{{ $contact->title }}</td>
                             <td>{{ $contact->message }}</td>
                             <td>
-                                <form action="{{ route('contact-us.delete', $slider->id) }}" method="POST" class="d-inline">
+                                <form action="{{ route('contact-us.delete', $contact->id) }}" method="POST" class="d-inline">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-danger">حذف</button>
