@@ -12,9 +12,30 @@ class homeController extends Controller
     public function userShipments()
     {
         $user = auth()->guard('api')->user();
-        $shipments = $user->shipments()->with('container.location', )->get();
+        if (!$user) {
+            return response()->json(['error' => 'Unauthorized'], 401);
+        }
+        $shipments = $user->shipments()
+            ->with(['container.location'])
+            ->take(5)
+            ->get();
+
         return response()->json($shipments, 200);
     }
+
+    public function allShipment()
+    {
+        $user = auth()->guard('api')->user();
+        if (!$user) {
+            return response()->json(['error' => 'Unauthorized'], 401);
+        }
+        $shipments = $user->shipments()->with('container.location')->get();
+        if ($shipments->count() == 0) {
+            return response()->json('No shipment found.', 404);
+        }
+        return response()->json($shipments, 200);
+    }
+
 
     public function shipment($shipmentId)
     {
