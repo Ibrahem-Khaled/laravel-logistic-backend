@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\dashboard\ContactUsController;
 use App\Http\Controllers\dashboard\ContainerController;
 use App\Http\Controllers\dashboard\LocationController;
 use App\Http\Controllers\dashboard\ShipmentController;
@@ -50,5 +51,9 @@ Route::group(['middleware' => ['auth', 'isAdmin']], function () {
 
     //this route sliders
     Route::resource('sliders', SliderController::class);
+
+    //this route contact us
+    Route::get('contact-us', [ContactUsController::class, 'index'])->name('contact-us');
+    Route::delete('contact-us/{id}', [ContactUsController::class, 'delete'])->name('contact-us.delete');
 
 });

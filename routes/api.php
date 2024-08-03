@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\api\AuthController;
 use App\Http\Controllers\api\homeController;
+use App\Http\Controllers\dashboard\ContactUsController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -18,6 +19,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::post('login', [AuthController::class, 'login']);
 Route::post('register', [AuthController::class, 'register']);
+Route::post('update', [AuthController::class, 'update']);
 Route::get('user', [AuthController::class, 'user']);
 Route::post('logout', [AuthController::class, 'logout']);
 
@@ -31,4 +33,6 @@ Route::group([], function () {
     Route::get('shipments/delivered', [homeController::class, 'deliveredShipments']);
     Route::get('slides', [homeController::class, 'slides']);
 
+    //store contact us message 
+    Route::post('contact-us', [ContactUsController::class, 'store']);
 });

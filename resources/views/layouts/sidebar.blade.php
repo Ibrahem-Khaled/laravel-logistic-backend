@@ -54,6 +54,12 @@
                     <span class="nav-link-text ms-1">إدارة السلايدر</span>
                 </a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link text-white" href="{{ route('contact-us') }}">
+                    <i class="fas fa-envelope me-2"></i>
+                    <span class="nav-link-text ms-1">إدارة رسائل العملاء</span>
+                </a>
+            </li>
         </ul>
     </div>
 </aside>
