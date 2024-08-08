@@ -5,6 +5,7 @@ namespace App\Http\Controllers\api;
 use App\Http\Controllers\Controller;
 use App\Models\Shipment;
 use App\Models\Sliders;
+use App\Models\Notfication;
 use Illuminate\Http\Request;
 
 class homeController extends Controller
@@ -86,5 +87,14 @@ class homeController extends Controller
             return response()->json('No slides found.', 404);
         }
         return response()->json($slides, 200);
+    }
+
+    public function notificatins()
+    {
+        $notifications = Notfication::all();
+        if ($notifications->count() == 0) {
+            return response()->json('No notifications found.', 404);
+        }
+        return response()->json($notifications, 200);
     }
 }

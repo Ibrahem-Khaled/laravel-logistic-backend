@@ -22,6 +22,7 @@ Route::post('register', [AuthController::class, 'register']);
 Route::post('update', [AuthController::class, 'update']);
 Route::get('user', [AuthController::class, 'user']);
 Route::post('logout', [AuthController::class, 'logout']);
+Route::post('change-password', [AuthController::class, 'changePassword']);
 
 
 Route::group([], function () {
@@ -33,6 +34,7 @@ Route::group([], function () {
     Route::get('shipments/pending', [homeController::class, 'pendingShipments']);
     Route::get('shipments/delivered', [homeController::class, 'deliveredShipments']);
     Route::get('slides', [homeController::class, 'slides']);
+    Route::get('notificatins', [homeController::class, 'notificatins']);
 
     //store contact us message 
     Route::post('contact-us', [ContactUsController::class, 'store']);

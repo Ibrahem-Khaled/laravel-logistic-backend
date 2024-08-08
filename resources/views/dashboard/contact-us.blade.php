@@ -15,8 +15,12 @@
                         <th>اسم العميل </th>
                         <th>رقم العميل </th>
                         <th>البريد الالكتروني</th>
-                        <th>عنوان الرسالة</th>
-                        <th>وصف الرسالة</th>
+                        <th>الحجم</th>
+                        <th>الوزن</th>
+                        <th>عدد الكراتين</th>
+                        <th>نوع البضاعة</th>
+                        <th>منطقة الاستلام</th>
+                        <th>منطقة التسليم</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
@@ -26,8 +30,12 @@
                             <td>{{ $contact->user->name }}</td>
                             <td>{{ $contact->user->phone }}</td>
                             <td>{{ $contact->user->email }}</td>
-                            <td>{{ $contact->title }}</td>
-                            <td>{{ $contact->message }}</td>
+                            <td>{{ $contact->size }}</td>
+                            <td>{{ $contact->weight }}</td>
+                            <td>{{ $contact->cartonsCount }}</td>
+                            <td>{{ $contact->goodsType }}</td>
+                            <td>{{ $contact->pickupLocation }}</td>
+                            <td>{{ $contact->deliveryLocation }}</td>
                             <td>
                                 <form action="{{ route('contact-us.delete', $contact->id) }}" method="POST" class="d-inline">
                                     @csrf

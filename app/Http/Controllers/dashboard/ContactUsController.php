@@ -22,8 +22,12 @@ class ContactUsController extends Controller
         }
         ContactUs::create([
             'user_id' => $user->id,
-            'title' => $request->title,
-            'message' => $request->message,
+            'size' => $request->size,
+            'weight' => $request->weight,
+            'cartonsCount' => $request->cartonsCount,
+            'goodsType' => $request->goodsType,
+            'pickupLocation' => $request->pickupLocation,
+            'deliveryLocation' => $request->deliveryLocation
         ]);
         return response()->json(['message' => 'تم الارسال بنجاح']);
     }

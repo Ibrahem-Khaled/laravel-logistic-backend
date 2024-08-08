@@ -67,6 +67,22 @@ class AuthController extends Controller
         return response()->json($user, 200);
     }
 
+    public function changePassword(Request $request)
+    {
+        $request->validate([
+            'old_password' => 'required|string',
+            'new_password' => 'required|string|min:8',
+        ]);
+
+        $user = JWTAuth::parseToken()->authenticate();
+        if (!Hash::check($request->old_password, $user->password)) {
+            return response()->json(['message' => 'Old password does not match'], 401);
+        }
+        $user->password = Hash::make($request->new_password);
+        $user->save();
+        return response()->json(['message' => 'Password changed successfully'], 200);
+    }
+
     public function user(Request $request)
     {
         try {

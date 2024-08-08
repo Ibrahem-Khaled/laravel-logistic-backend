@@ -57,7 +57,13 @@
             <li class="nav-item">
                 <a class="nav-link text-white" href="{{ route('contact-us') }}">
                     <i class="fas fa-envelope me-2"></i>
-                    <span class="nav-link-text ms-1">إدارة رسائل العملاء</span>
+                    <span class="nav-link-text ms-1">إدارة عروض الاسعار</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-white" href="{{ route('notifications.index') }}">
+                    <i class="fas fa-bell me-2"></i>
+                    <span class="nav-link-text ms-1">إدارة الاشعارات</span>
                 </a>
             </li>
         </ul>

@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\dashboard\ContactUsController;
 use App\Http\Controllers\dashboard\ContainerController;
 use App\Http\Controllers\dashboard\LocationController;
+use App\Http\Controllers\dashboard\NotificationController;
 use App\Http\Controllers\dashboard\ShipmentController;
 use App\Http\Controllers\dashboard\ShipmentTrackingController;
 use App\Http\Controllers\dashboard\SliderController;
@@ -55,5 +56,9 @@ Route::group(['middleware' => ['auth', 'isAdmin']], function () {
     //this route contact us
     Route::get('contact-us', [ContactUsController::class, 'index'])->name('contact-us');
     Route::delete('contact-us/{id}', [ContactUsController::class, 'delete'])->name('contact-us.delete');
+
+    //this route notifications
+    Route::resource('notifications', NotificationController::class);
+
 
 });
