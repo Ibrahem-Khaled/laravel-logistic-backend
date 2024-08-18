@@ -21,7 +21,7 @@
     </select>
 </div>
 <div class="mb-3">
-    <label for="delivered_date" class="form-label">تاريخ التسليم</label>
+    <label for="delivered_date" class="form-label">التاريخ</label>
     <input type="date" class="form-control" id="delivered_date" name="delivered_date"
         value="{{ old('delivered_date', $shipmentTracking->delivered_date) }}">
 </div>

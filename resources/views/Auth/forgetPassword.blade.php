@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>إنشاء حساب</title>
+    <title>استعادة كلمة المرور</title>
 
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
@@ -90,30 +90,15 @@
             <div class="logo-container">
                 <img src="{{ asset('assets/img/logo-ct-dark.png') }}" alt="Logo">
             </div>
-            <h3 class="mb-4 text-center">إنشاء حساب</h3>
-            <form method="POST" action="{{ route('customRegister') }}">
+            <h3 class="mb-4 text-center">استعادة كلمة المرور</h3>
+            <form method="POST" action="#">
                 @csrf
-
-                <div class="form-group mb-4">
-                    <label>الاسم الكامل</label>
-                    <input type="text" name="name" class="form-control" placeholder="أدخل اسمك الكامل" required>
-                </div>
                 <div class="form-group mb-4">
                     <label>البريد الإلكتروني</label>
-                    <input type="email" name="email" class="form-control" placeholder="أدخل بريدك الإلكتروني"
-                        required>
+                    <input type="email" name="email" class="form-control" placeholder="أدخل بريدك الإلكتروني">
                 </div>
-                <div class="form-group mb-4">
-                    <label>كلمة المرور</label>
-                    <input type="password" name="password" class="form-control" placeholder="أدخل كلمة المرور" required>
-                </div>
-                <div class="form-group mb-4">
-                    <label>تأكيد كلمة المرور</label>
-                    <input type="password" name="password_confirmation" class="form-control"
-                        placeholder="أعد إدخال كلمة المرور" required>
-                </div>
-                <button type="submit" class="btn btn-primary w-100 mb-3">تسجيل</button>
-                <small class="d-block text-center">لديك حساب بالفعل؟ <a href="{{ route('login') }}">تسجيل
+                <button type="submit" class="btn btn-primary w-100 mb-3">إرسال رابط استعادة كلمة المرور</button>
+                <small class="d-block text-center">تذكرت كلمة المرور؟ <a href="{{ route('login') }}">تسجيل
                         الدخول</a></small>
             </form>
         </div>

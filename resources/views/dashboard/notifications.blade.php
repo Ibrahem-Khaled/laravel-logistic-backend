@@ -3,7 +3,7 @@
 @section('content')
     <div class="container mt-5">
         <div class="d-flex justify-content-between align-items-center mb-3">
-            <h3>الاشعارات</h3>
+            <h3>الإشعارات</h3>
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addNotificationModal">إضافة
                 إشعار</button>
         </div>
@@ -15,7 +15,7 @@
                         <th>العنوان</th>
                         <th>الوصف</th>
                         <th>الصورة</th>
-                        <th>Actions</th>
+                        <th>العمليات</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -25,14 +25,37 @@
                             <td>{{ $notification->body }}</td>
                             <td>{{ $notification->image }}</td>
                             <td>
-                                <form action="{{ route('notifications.destroy', $notification->id) }}" method="POST"
-                                    class="d-inline">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn btn-danger">حذف</button>
-                                </form>
+                                <button type="button" class="btn btn-danger" data-toggle="modal"
+                                    data-target="#deleteConfirmationModal{{ $notification->id }}">حذف</button>
                             </td>
                         </tr>
+
+                        <!-- Delete Confirmation Modal -->
+                        <div class="modal fade" id="deleteConfirmationModal{{ $notification->id }}" tabindex="-1"
+                            aria-labelledby="deleteConfirmationModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="deleteConfirmationModalLabel">تأكيد الحذف</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <p>هل أنت متأكد أنك تريد حذف هذا الإشعار؟</p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">إلغاء</button>
+                                        <form action="{{ route('notifications.destroy', $notification->id) }}"
+                                            method="POST" class="d-inline">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-danger">تأكيد الحذف</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     @endforeach
                 </tbody>
             </table>

@@ -1,5 +1,3 @@
-<!-- resources/views/shipment_trackings/index.blade.php -->
-
 @extends('layouts.dashboard')
 
 @section('content')
@@ -38,12 +36,11 @@
                                     data-bs-target="#editShipmentTrackingModal{{ $shipmentTracking->id }}">
                                     تعديل
                                 </button>
-                                <form action="{{ route('shipment_trackings.destroy', $shipmentTracking->id) }}"
-                                    method="POST" class="d-inline">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn btn-danger">حذف</button>
-                                </form>
+                                <!-- Delete Button triggers the confirmation modal -->
+                                <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                                    data-bs-target="#deleteConfirmationModal{{ $shipmentTracking->id }}">
+                                    حذف
+                                </button>
                             </td>
                         </tr>
 
@@ -70,6 +67,33 @@
                                                     data-bs-dismiss="modal">إغلاق</button>
                                                 <button type="submit" class="btn btn-primary">حفظ التغييرات</button>
                                             </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Delete Confirmation Modal -->
+                        <div class="modal fade" id="deleteConfirmationModal{{ $shipmentTracking->id }}" tabindex="-1"
+                            aria-labelledby="deleteConfirmationModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="deleteConfirmationModalLabel">تأكيد الحذف</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <p>هل أنت متأكد أنك تريد حذف هذا التتبع؟</p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                            data-bs-dismiss="modal">إلغاء</button>
+                                        <form action="{{ route('shipment_trackings.destroy', $shipmentTracking->id) }}"
+                                            method="POST" class="d-inline">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-danger">تأكيد الحذف</button>
                                         </form>
                                     </div>
                                 </div>

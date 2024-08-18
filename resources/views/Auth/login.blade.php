@@ -11,105 +11,106 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.3.2/mdb.min.css" rel="stylesheet" />
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200..1000&display=swap" rel="stylesheet">
+
     <style>
         body {
-            color: #000;
-            background-color: #B0BEC5;
-            background-repeat: no-repeat;
+            color: #fff;
+            background-color: #ff00ea;
             background-size: cover;
             height: 100%;
             direction: rtl;
+            font-family: "Cairo", sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0;
+            padding: 0;
         }
 
-        .card0 {
-            box-shadow: 0px 4px 8px 0px #757575;
-            border-radius: 10px;
+        .container {
+            max-width: 900px;
+            background-color: #fff;
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+            border-radius: 15px;
+            display: flex;
+            overflow: hidden;
         }
 
-        .card2 {
-            margin: 20px;
+        .image-container {
+            background-image: url('https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse3.mm.bing.net%2Fth%3Fid%3DOIP.zyvdkrnveztTW6Dt-VeNfQHaD4%26pid%3DApi&f=1&ipt=e2cc5542d280de32ed56b8eb717f4d4f0cf2631ade2ed857c815dcfdf4d2fa8e&ipo=images');
+            background-size: cover;
+            background-position: center;
+            width: 50%;
+            height: auto;
+        }
+
+        .form-container {
+            padding: 50px;
+            width: 50%;
+            background-color: #f8f9fa;
+            color: #000;
+        }
+
+        .logo-container {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .logo-container img {
+            max-width: 120px;
         }
 
         .btn-primary {
-            background-color: #1A237E;
+            background-color: #ff5722;
             border: none;
         }
 
         .btn-primary:hover {
-            background-color: #000;
-        }
-
-        .text-muted {
-            font-size: 14px;
-        }
-
-        .form-control::placeholder {
-            color: #BDBDBD;
-            font-weight: 300;
-        }
-
-        .custom-checkbox .custom-control-label::before {
-            border-color: #1A237E;
-        }
-
-        .custom-checkbox .custom-control-input:checked~.custom-control-label::before {
-            background-color: #1A237E;
+            background-color: #e64a19;
         }
 
         a {
-            color: #1A237E;
+            color: #ff5722;
         }
 
         a:hover {
-            color: #000;
+            color: #e64a19;
             text-decoration: none;
         }
     </style>
 </head>
 
 <body>
-    <div class="container-fluid px-5 py-5 mx-auto">
-        <div class="card card0 border-0">
-            <div class="row d-flex justify-content-center">
-                <div class="col-lg-6">
-                    <div class="card2 card border-0 px-4 py-5">
-                        <div class="row px-3 mb-4">
-                            <h3 class="mb-0 text-center">تسجيل الدخول</h3>
-                        </div>
-                        <form method="POST" action="{{ route('customLogin') }}">
-                            @csrf
-                            
-                            <div class="row px-3">
-                                <label class="mb-1">
-                                    <h6 class="mb-0 text-sm">البريد الإلكتروني</h6>
-                                </label>
-                                <input class="form-control mb-4" type="email" name="email"
-                                    placeholder="أدخل بريدك الإلكتروني">
-                            </div>
-                            <div class="row px-3">
-                                <label class="mb-1">
-                                    <h6 class="mb-0 text-sm">كلمة المرور</h6>
-                                </label>
-                                <input class="form-control" type="password" name="password"
-                                    placeholder="أدخل كلمة المرور">
-                            </div>
-                            <div class="row px-3 mb-4">
-                                <div class="custom-control custom-checkbox">
-                                    <input id="chk1" type="checkbox" name="chk" class="custom-control-input">
-                                    <label for="chk1" class="custom-control-label text-muted">تذكرني</label>
-                                </div>
-                                <a href="#" class="ml-auto mb-0 text-muted">نسيت كلمة المرور؟</a>
-                            </div>
-                            <div class="row mb-3 px-3">
-                                <button type="submit" class="btn btn-primary text-center">دخول</button>
-                            </div>
-                            <div class="row px-3">
-                                <small class="font-weight-bold">ليس لديك حساب؟ <a href="{{ route('register') }}">إنشاء حساب</a></small>
-                            </div>
-                        </form>
-                    </div>
-                </div>
+    <div class="container">
+        <div class="image-container"></div>
+        <div class="form-container">
+            <div class="logo-container">
+                <img src="{{ asset('assets/img/logo-ct-dark.png') }}" alt="Logo">
             </div>
+            <h3 class="mb-4 text-center">تسجيل الدخول</h3>
+            <form method="POST" action="{{ route('customLogin') }}">
+                @csrf
+
+                <div class="form-group mb-4">
+                    <label>البريد الإلكتروني</label>
+                    <input type="email" name="email" class="form-control" placeholder="أدخل بريدك الإلكتروني">
+                </div>
+                <div class="form-group mb-4">
+                    <label>كلمة المرور</label>
+                    <input type="password" name="password" class="form-control" placeholder="أدخل كلمة المرور">
+                </div>
+                <div class="form-group form-check mb-4">
+                    <input type="checkbox" class="form-check-input" id="chk1" name="chk">
+                    <label class="form-check-label text-muted" for="chk1">تذكرني</label>
+                    <a href="{{ route('forgetPassword') }}" class="float-end text-muted">نسيت كلمة المرور؟</a>
+                </div>
+                <button type="submit" class="btn btn-primary w-100 mb-3">دخول</button>
+                <small class="d-block text-center">ليس لديك حساب؟ <a href="{{ route('register') }}">إنشاء
+                        حساب</a></small>
+            </form>
         </div>
     </div>
 

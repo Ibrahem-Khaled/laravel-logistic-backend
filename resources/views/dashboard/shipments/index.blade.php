@@ -21,7 +21,7 @@
                     <tr>
                         <th>المستخدم</th>
                         <th>الحاوية</th>
-                        <th>النوع</th>
+                        {{-- <th>النوع</th> --}}
                         <th>اماكن التتبع</th>
                         <th>رقم التتبع</th>
                         <th>منطقة الإرسال</th>
@@ -41,7 +41,7 @@
                         <tr>
                             <td>{{ $shipment->user->name }}</td>
                             <td>{{ $shipment->container->container_number }}</td>
-                            <td>{{ $shipment->type }}</td>
+                            {{-- <td>{{ $shipment->type }}</td> --}}
                             <td>
                                 <ul>
                                     @foreach ($shipment->container->location as $tracking)
@@ -52,8 +52,8 @@
                             <td>{{ $shipment->tracking_number }}</td>
                             <td>{{ $shipment->sent_area }}</td>
                             <td>{{ $shipment->delivered_area }}</td>
-                            <td>{{ $shipment->sent_date }}</td>
-                            <td>{{ $shipment->delivered_date }}</td>
+                            <td>{{ \Carbon\Carbon::parse($shipment->sent_date)->format('Y-m-d') }}</td>
+                            <td>{{ \Carbon\Carbon::parse($shipment->delivered_date)->format('Y-m-d') }}</td>
                             <td>{{ $shipment->weight }}</td>
                             <td>{{ $shipment->dimensions }}</td>
                             <td>{{ $shipment->price }}</td>
@@ -77,16 +77,15 @@
                                     data-bs-target="#editShipmentModal{{ $shipment->id }}">
                                     تعديل
                                 </button>
-                                <form action="{{ route('shipments.destroy', $shipment->id) }}" method="POST"
-                                    class="d-inline">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn btn-danger">حذف</button>
-                                </form>
+                                <!-- Delete Button triggers the confirmation modal -->
+                                <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                                    data-bs-target="#deleteConfirmationModal{{ $shipment->id }}">
+                                    حذف
+                                </button>
                             </td>
                         </tr>
 
-                        <!-- تعديل شحنة -->
+                        <!-- Edit Shipment Modal -->
                         <div class="modal fade" id="editShipmentModal{{ $shipment->id }}" tabindex="-1"
                             aria-labelledby="editShipmentModalLabel" aria-hidden="true">
                             <div class="modal-dialog">
@@ -111,6 +110,33 @@
                                 </div>
                             </div>
                         </div>
+
+                        <!-- Delete Confirmation Modal -->
+                        <div class="modal fade" id="deleteConfirmationModal{{ $shipment->id }}" tabindex="-1"
+                            aria-labelledby="deleteConfirmationModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="deleteConfirmationModalLabel">تأكيد الحذف</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <p>هل أنت متأكد أنك تريد حذف هذه الشحنة؟</p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                            data-bs-dismiss="modal">إلغاء</button>
+                                        <form action="{{ route('shipments.destroy', $shipment->id) }}" method="POST"
+                                            class="d-inline">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-danger">تأكيد الحذف</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     @endforeach
                 </tbody>
             </table>
@@ -120,7 +146,7 @@
         </div>
     </div>
 
-    <!-- إضافة شحنة -->
+    <!-- Add Shipment Modal -->
     <div class="modal fade" id="addShipmentModal" tabindex="-1" aria-labelledby="addShipmentModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">

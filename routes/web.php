@@ -30,6 +30,7 @@ Route::post('register', [AuthController::class, 'customRegister'])->name('custom
 Route::post('logout', [AuthController::class, 'logout'])->name('logout');
 Route::get('proflie', [AuthController::class, 'profile'])->name('proflie');
 Route::post('/profile', [AuthController::class, 'update'])->name('profile.update');
+Route::get('forget-password', [AuthController::class, 'forgetPassword'])->name('forgetPassword');
 
 Route::group(['middleware' => ['auth', 'isAdmin']], function () {
 

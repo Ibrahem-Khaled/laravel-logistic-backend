@@ -1,12 +1,12 @@
 <aside
-    class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3 bg-gradient-dark"
+    class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-end me-3 bg-gradient-dark"
     id="sidenav-main">
     <div class="sidenav-header">
-        <i class="fas fa-times p-3 cursor-pointer text-white opacity-5 position-absolute end-0 top-0 d-none d-xl-none"
+        <i class="fas fa-times p-3 cursor-pointer text-white opacity-5 position-absolute start-0 top-0 d-none d-xl-none"
             aria-hidden="true" id="iconSidenav"></i>
         <a class="navbar-brand m-0" href="{{ route('users.index') }}">
             <img src="../assets/img/logo-ct-dark.png" class="navbar-brand-img h-100" alt="main_logo">
-            <span class="ms-1 font-weight-bold text-white">{{ config('app.name') }}</span>
+            <span class="me-1 font-weight-bold text-white">{{ config('app.name') }}</span>
         </a>
     </div>
     <hr class="horizontal light mt-0">
@@ -14,56 +14,56 @@
         <ul class="navbar-nav">
             <li class="nav-item">
                 <a class="nav-link text-white" href="{{ route('home') }}">
-                    <i class="fas fa-home me-2"></i>
-                    <span class="nav-link-text ms-1">الرئيسية</span>
+                    <i class="fas fa-home ms-2"></i>
+                    <span class="nav-link-text me-1">الرئيسية</span>
                 </a>
             </li>
             <li class="nav-item">
                 <a class="nav-link text-white" href="{{ route('users.index') }}">
-                    <i class="fas fa-user me-2"></i>
-                    <span class="nav-link-text ms-1">إدارة المستخدمين</span>
+                    <i class="fas fa-user ms-2"></i>
+                    <span class="nav-link-text me-1">إدارة المستخدمين</span>
                 </a>
             </li>
             <li class="nav-item">
                 <a class="nav-link text-white" href="{{ route('containers.index') }}">
-                    <i class="fas fa-boxes me-2"></i>
-                    <span class="nav-link-text ms-1">إدارة الحاويات</span>
+                    <i class="fas fa-boxes ms-2"></i>
+                    <span class="nav-link-text me-1">إدارة الحاويات</span>
                 </a>
             </li>
             <li class="nav-item">
                 <a class="nav-link text-white" href="{{ route('shipments.index') }}">
-                    <i class="fas fa-shipping-fast me-2"></i>
-                    <span class="nav-link-text ms-1">إدارة الشحنات</span>
+                    <i class="fas fa-shipping-fast ms-2"></i>
+                    <span class="nav-link-text me-1">إدارة الشحنات</span>
                 </a>
             </li>
             <li class="nav-item">
                 <a class="nav-link text-white" href="{{ route('locations.index') }}">
-                    <i class="fas fa-map me-2"></i>
-                    <span class="nav-link-text ms-1">إدارة المواقع</span>
+                    <i class="fas fa-map ms-2"></i>
+                    <span class="nav-link-text me-1">إدارة المواقع</span>
                 </a>
             </li>
             <li class="nav-item">
                 <a class="nav-link text-white" href="{{ route('shipment_trackings.index') }}">
-                    <i class="fas fa-pin me-2"></i>
-                    <span class="nav-link-text ms-1">إدارة التتبع</span>
+                    <i class="fas fa-pin ms-2"></i>
+                    <span class="nav-link-text me-1">إدارة التتبع</span>
                 </a>
             </li>
             <li class="nav-item">
                 <a class="nav-link text-white" href="{{ route('sliders.index') }}">
-                    <i class="fas fa-image me-2"></i>
-                    <span class="nav-link-text ms-1">إدارة السلايدر</span>
+                    <i class="fas fa-image ms-2"></i>
+                    <span class="nav-link-text me-1">إدارة السلايدر</span>
                 </a>
             </li>
             <li class="nav-item">
                 <a class="nav-link text-white" href="{{ route('contact-us') }}">
-                    <i class="fas fa-envelope me-2"></i>
-                    <span class="nav-link-text ms-1">إدارة عروض الاسعار</span>
+                    <i class="fas fa-envelope ms-2"></i>
+                    <span class="nav-link-text me-1">إدارة عروض الاسعار</span>
                 </a>
             </li>
             <li class="nav-item">
                 <a class="nav-link text-white" href="{{ route('notifications.index') }}">
-                    <i class="fas fa-bell me-2"></i>
-                    <span class="nav-link-text ms-1">إدارة الاشعارات</span>
+                    <i class="fas fa-bell ms-2"></i>
+                    <span class="nav-link-text me-1">إدارة الاشعارات</span>
                 </a>
             </li>
         </ul>
@@ -75,6 +75,8 @@
     .sidenav {
         background-color: #2c3e50;
         padding: 0;
+        right: 0;
+        left: auto;
     }
 
     .sidenav .navbar-brand {
@@ -86,7 +88,7 @@
 
     .sidenav .navbar-brand-img {
         max-height: 2.5rem;
-        margin-right: 0.5rem;
+        margin-left: 0.5rem;
     }
 
     .sidenav .navbar-nav .nav-item {
@@ -110,7 +112,7 @@
     }
 
     .sidenav .nav-link-text {
-        margin-left: 0.5rem;
+        margin-right: 0.5rem;
     }
 
     .sidenav .horizontal {
