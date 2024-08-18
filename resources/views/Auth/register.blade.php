@@ -18,7 +18,7 @@
     <style>
         body {
             color: #fff;
-            background-color: #ff00ea;
+            background-color: #53045F;
             background-size: cover;
             height: 100%;
             direction: rtl;
@@ -37,6 +37,7 @@
             border-radius: 15px;
             display: flex;
             overflow: hidden;
+            margin-top: 3%;
         }
 
         .image-container {
@@ -101,6 +102,16 @@
                 <div class="form-group mb-4">
                     <label>البريد الإلكتروني</label>
                     <input type="email" name="email" class="form-control" placeholder="أدخل بريدك الإلكتروني"
+                        required>
+                </div>
+                <div class="form-group mb-4">
+                    <label>رقم الهاتف</label>
+                    <input type="phone" name="phone" id="phone" class="form-control"
+                        placeholder="أدخل رقم هاتفك" required>
+                </div>
+                <div class="form-group mb-4">
+                    <label>عنوان</label>
+                    <input type="text" name="address" id="address" class="form-control" placeholder="أدخل عنوانك"
                         required>
                 </div>
                 <div class="form-group mb-4">

@@ -14,7 +14,7 @@
         <ul class="navbar-nav align-items-center">
             @auth
                 <li class="nav-item">
-                    <span class="nav-link text-body p-0">{{ Auth::user()->name }}</span>
+                    <span class="nav-link btn btn-outline-secondary">{{ Auth::user()->name }}</span>
                 </li>
                 <li class="nav-item">
                     <form method="POST" action="{{ route('logout') }}" class="d-inline">

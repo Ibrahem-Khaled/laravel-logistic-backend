@@ -34,7 +34,7 @@
                 </ul>
             </div>
         </div>
-        <div class="col-md-6">
+        {{-- <div class="col-md-6">
             <div class="card mb-3">
                 <div class="card-header">
                     إضافة مستخدم جديد
@@ -58,7 +58,7 @@
                     </form>
                 </div>
             </div>
-        </div>
+        </div> --}}
     </div>
 
     <div class="row mb-4">

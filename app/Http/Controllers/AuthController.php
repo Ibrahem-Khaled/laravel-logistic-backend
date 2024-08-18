@@ -50,7 +50,7 @@ class AuthController extends Controller
         $credentials = $request->only('email', 'password');
         $remember = $request->has('remember');
         if (auth()->attempt($credentials, $remember)) {
-            return redirect()->intended('home')->with('success', 'تم تسجيل الدخول بنجاح.');
+            return redirect()->route('home')->with('success', 'تم تسجيل الدخول بنجاح.');
         } else {
             return redirect()->back()->with('error', 'تفاصيل تسجيل الدخول غير صحيحة. يرجى المحاولة مرة أخرى.');
         }

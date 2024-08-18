@@ -18,7 +18,7 @@
     <style>
         body {
             color: #fff;
-            background-color: #ff00ea;
+            background-color: #53045F;
             background-size: cover;
             height: 100%;
             direction: rtl;
@@ -37,6 +37,7 @@
             border-radius: 15px;
             display: flex;
             overflow: hidden;
+            margin-top: 100px;
         }
 
         .image-container {

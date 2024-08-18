@@ -72,7 +72,6 @@
             background-color: #e64a19;
             border: none;
             padding: 10px 20px;
-            border-radius: 25px;
             transition: background-color 0.3s ease;
         }
 
@@ -81,7 +80,7 @@
         }
 
         .form-control {
-            border-radius: 25px;
+            border-radius: 10px;
             padding: 10px 20px;
             margin-bottom: 15px;
             border: 1px solid #ffeb3b;
@@ -130,6 +129,16 @@
                         <label for="email">البريد الإلكتروني</label>
                         <input type="email" class="form-control" id="email" name="email"
                             value="{{ old('email', $user->email) }}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="address">العنوان</label>
+                        <input type="text" class="form-control" id="address" name="address"
+                            value="{{ old('address', $user->address) }}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">رقم الهاتف</label>
+                        <input type="phone" class="form-control" id="phone" name="phone"
+                            value="{{ old('phone', $user->phone) }}" required>
                     </div>
                     <div class="form-group">
                         <label for="password">كلمة المرور الجديدة (اترك الحقل فارغًا إذا كنت لا ترغب في تغييرها)</label>
