@@ -33,6 +33,8 @@ class ShipmentTrackingController extends Controller
         $request->validate([
             'shipment_id' => 'required|exists:shipments,id',
             'location_id' => 'required|exists:locations,id',
+            'delivered_date' => 'nullable|date',
+            'expected_arrival_date' => 'nullable|date',
         ]);
 
         $shipmentTracking->update($request->all());

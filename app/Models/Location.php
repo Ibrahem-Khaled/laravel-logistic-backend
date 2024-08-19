@@ -14,6 +14,7 @@ class Location extends Model
 
     public function container()
     {
-        return $this->belongsToMany(Container::class, 'shipment_trackings', 'location_id', 'container_id');
+        return $this->belongsToMany(Container::class, 'shipment_trackings', 'location_id', 'container_id')
+            ->withPivot('expected_arrival_date');
     }
 }

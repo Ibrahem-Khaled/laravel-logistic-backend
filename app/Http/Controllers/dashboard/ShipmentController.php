@@ -10,7 +10,19 @@ class ShipmentController extends Controller
 {
     public function index()
     {
-        $shipments = Shipment::with('user', 'container')->paginate(10);
+        $shipments = Shipment::with('user', 'container.location')->paginate(10);
+
+        $modifiedShipments = $shipments->getCollection()->map(function ($shipment) {
+            $location = $shipment->container->location->last();
+
+            if ($location && !is_null($location->pivot->expected_arrival_date)) {
+                $shipment->delivered_date = $location->pivot->expected_arrival_date;
+            }
+
+            return $shipment;
+        });
+        $shipments->setCollection($modifiedShipments);
+        // return response()->json($shipments);
         return view('dashboard.shipments.index', compact('shipments'));
     }
 
