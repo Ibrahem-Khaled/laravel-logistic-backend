@@ -42,16 +42,28 @@ class homeController extends Controller
             return response()->json(['error' => 'Unauthorized'], 401);
         }
         $shipments = $user->shipments()->with('container.location')->get();
+
         if ($shipments->count() == 0) {
             return response()->json('No shipment found.', 404);
         }
-        return response()->json($shipments, 200);
+        $modifiedShipments = $shipments->map(function ($shipment) {
+            $location = $shipment->container->location->last();
+
+            if ($location && !is_null($location->pivot->expected_arrival_date)) {
+                $shipment->delivered_date = $location->pivot->expected_arrival_date;
+            }
+
+            return $shipment;
+        });
+
+        return response()->json($modifiedShipments, 200);
     }
 
 
     public function shipment($shipmentId)
     {
         $shipment = Shipment::with('container.location')->find($shipmentId);
+
         if (!$shipment) {
             return response()->json('Shipment not found.', 404);
         }
@@ -64,13 +76,21 @@ class homeController extends Controller
         if (empty($q)) {
             return response()->json('Search field is required.', 400);
         }
-        $shipments = Shipment::with('user', 'container.location')->where('tracking_number', $q)->first();
-        if (!$shipments) {
+
+        $shipment = Shipment::with(['user', 'container.locations'])->where('tracking_number', $q)->first();
+
+        if (!$shipment) {
             return response()->json('Shipment not found.', 404);
         }
-        return response()->json($shipments, 200);
-    }
 
+        $location = $shipment->container->locations->last();
+
+        if ($location && !is_null($location->pivot->expected_arrival_date)) {
+            $shipment->delivered_date = $location->pivot->expected_arrival_date;
+        }
+
+        return response()->json($shipment, 200);
+    }
     public function pendingShipments()
     {
         $user = auth()->guard('api')->user();
