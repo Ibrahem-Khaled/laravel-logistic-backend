@@ -23,10 +23,13 @@ class homeController extends Controller
             ->get();
 
         $modifiedShipments = $shipments->map(function ($shipment) {
-            $location = $shipment->container->location->last(); // افترض أن location هو collection
-            if ($location && $location->expected_arrival_date) {
+            // افترض أن العلاقة مع container تحتوي على مواقع متعددة
+            $location = $shipment->container->location->sortByDesc('id')->first(); // تأكد من ترتيب المواقع بشكل صحيح للحصول على آخر موقع
+
+            if ($location && !is_null($location->expected_arrival_date)) {
                 $shipment->delivered_date = $location->expected_arrival_date;
             }
+
             return $shipment;
         });
 
