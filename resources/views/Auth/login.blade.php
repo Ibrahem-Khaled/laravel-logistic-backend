@@ -97,11 +97,12 @@
 
                 <div class="form-group mb-4">
                     <label>البريد الإلكتروني</label>
-                    <input type="email" name="email" class="form-control" placeholder="أدخل بريدك الإلكتروني">
+                    <input type="email" name="email" class="form-control" placeholder="أدخل بريدك الإلكتروني"
+                        required>
                 </div>
                 <div class="form-group mb-4">
                     <label>كلمة المرور</label>
-                    <input type="password" name="password" class="form-control" placeholder="أدخل كلمة المرور">
+                    <input type="password" name="password" class="form-control" placeholder="أدخل كلمة المرور" required>
                 </div>
                 <div class="form-group form-check mb-4">
                     <input type="checkbox" class="form-check-input" id="chk1" name="chk">

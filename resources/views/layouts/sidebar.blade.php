@@ -1,5 +1,5 @@
 <aside
-    class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-end me-3 bg-gradient-dark"
+    class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3 bg-gradient-dark"
     id="sidenav-main">
     <div class="sidenav-header">
         <i class="fas fa-times p-2 cursor-pointer text-white opacity-5 position-absolute start-0 top-0 d-none d-xl-none"
@@ -74,9 +74,6 @@
 <style>
     .sidenav {
         background-color: #2c3e50;
-        padding: 0;
-        right: 0;
-        left: auto;
     }
 
     .sidenav .navbar-brand {
