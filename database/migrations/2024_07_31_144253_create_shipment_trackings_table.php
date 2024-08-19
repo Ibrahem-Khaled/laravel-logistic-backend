@@ -17,6 +17,7 @@ return new class extends Migration {
             $table->bigInteger('location_id')->unsigned();
             $table->foreign('location_id')->references('id')->on('locations')->onDelete('cascade');
             $table->timestamp('delivered_date')->nullable();
+            $table->timestamp('expected_arrival_date')->nullable();
             $table->timestamps();
         });
     }

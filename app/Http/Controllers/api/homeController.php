@@ -16,12 +16,21 @@ class homeController extends Controller
         if (!$user) {
             return response()->json(['error' => 'Unauthorized'], 401);
         }
+
         $shipments = $user->shipments()
             ->with(['container.location'])
             ->take(5)
             ->get();
 
-        return response()->json($shipments, 200);
+        $modifiedShipments = $shipments->map(function ($shipment) {
+            $location = $shipment->container->location->last(); // افترض أن location هو collection
+            if ($location && $location->expected_arrival_date) {
+                $shipment->delivered_date = $location->expected_arrival_date;
+            }
+            return $shipment;
+        });
+
+        return response()->json($modifiedShipments, 200);
     }
 
     public function allShipment()

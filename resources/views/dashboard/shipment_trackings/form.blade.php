@@ -25,3 +25,8 @@
     <input type="date" class="form-control" id="delivered_date" name="delivered_date"
         value="{{ old('delivered_date', $shipmentTracking->delivered_date) }}">
 </div>
+<div class="mb-3">
+    <label for="expected_arrival_date" class="form-label">تاريخ التسليم المتوقع</label>
+    <input type="date" class="form-control" id="expected_arrival_date" name="expected_arrival_date"
+        value="{{ old('expected_arrival_date', $shipmentTracking->expected_arrival_date) }}">
+</div>

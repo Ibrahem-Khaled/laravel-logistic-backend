@@ -22,6 +22,7 @@
                         <th>الحاوية</th>
                         <th>الموقع</th>
                         <th>تاريخ الوصول</th>
+                        <th>تاريخ التسليم المتوقع</th>
                         <th>العمليات</th>
                     </tr>
                 </thead>
@@ -30,7 +31,13 @@
                         <tr>
                             <td>{{ $shipmentTracking->container->container_number }}</td>
                             <td>{{ $shipmentTracking->location->name }}</td>
-                            <td>{{ $shipmentTracking->delivered_date }}</td>
+                            <td>
+                                {{ $shipmentTracking->delivered_date ? \Carbon\Carbon::parse($shipmentTracking->delivered_date)->format('Y-m-d') : 'غير محدد' }}
+                            </td>
+                            <td>
+                                {{ $shipmentTracking->expected_arrival_date ? \Carbon\Carbon::parse($shipmentTracking->expected_arrival_date)->format('Y-m-d') : 'غير محدد' }}
+                            </td>
+                            </td>
                             <td>
                                 <button type="button" class="btn btn-warning" data-bs-toggle="modal"
                                     data-bs-target="#editShipmentTrackingModal{{ $shipmentTracking->id }}">
