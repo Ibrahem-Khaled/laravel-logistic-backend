@@ -77,7 +77,7 @@ class homeController extends Controller
             return response()->json('Search field is required.', 400);
         }
 
-        $shipment = Shipment::with(['user', 'container.locations'])->where('tracking_number', $q)->first();
+        $shipment = Shipment::with(['user', 'container.location'])->where('tracking_number', $q)->first();
 
         if (!$shipment) {
             return response()->json('Shipment not found.', 404);
