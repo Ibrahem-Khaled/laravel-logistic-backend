@@ -92,7 +92,7 @@
                 <img src="{{ asset('assets/img/logo-ct-dark.png') }}" alt="Logo">
             </div>
             <h3 class="mb-4 text-center">استعادة كلمة المرور</h3>
-            <form method="POST" action="#">
+            <form method="POST" action="{{ route('resetPassword') }}">
                 @csrf
                 <div class="form-group mb-4">
                     <label>البريد الإلكتروني</label>

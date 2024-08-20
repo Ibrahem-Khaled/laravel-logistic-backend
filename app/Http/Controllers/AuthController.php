@@ -36,7 +36,7 @@ class AuthController extends Controller
     public function login()
     {
         if (Auth::check()) {
-            return redirect('proflie')->with('success', 'تم تسجيل الدخول بنجاح.');
+            return redirect()->route('profile')->with('success', 'تم تسجيل الدخول بنجاح.');
         }
         return view('Auth.login');
     }
@@ -47,10 +47,17 @@ class AuthController extends Controller
             'email' => 'required|email',
             'password' => 'required|min:6',
         ]);
+
         $credentials = $request->only('email', 'password');
         $remember = $request->has('remember');
+
         if (auth()->attempt($credentials, $remember)) {
-            return redirect()->route('home')->with('success', 'تم تسجيل الدخول بنجاح.');
+            if (auth()->user()->role == 'admin') {
+                return redirect()->route('home')->with('success', 'تم تسجيل الدخول بنجاح.');
+            } else {
+                $this->logout();
+                return redirect()->back()->with('error', 'تفاصيل تسجيل الدخول غير صحيحة. يرجى المحاولة مرة أخرى.');
+            }
         } else {
             return redirect()->back()->with('error', 'تفاصيل تسجيل الدخول غير صحيحة. يرجى المحاولة مرة أخرى.');
         }
@@ -60,7 +67,7 @@ class AuthController extends Controller
     public function register()
     {
         if (Auth::check()) {
-            return redirect('proflie')->with('success', 'تم تسجيل الدخول بنجاح.');
+            return redirect()->route('home')->with('success', 'تم تسجيل الدخول بنجاح.');
         }
         return view('Auth.register');
     }
@@ -76,8 +83,8 @@ class AuthController extends Controller
         $data = $request->all();
         $data['password'] = bcrypt($data['password']);
         $user = User::create($data);
-        Auth::login($user);
-        return redirect()->route('home')->with('success', 'Registration successful. You can now login.');
+
+        return redirect()->back()->with('success', 'تم انشاء حسابك بنجاح');
     }
 
     public function logout()
@@ -89,5 +96,18 @@ class AuthController extends Controller
     public function forgetPassword()
     {
         return view('Auth.forgetPassword');
+    }
+
+    public function resetPassword(Request $request)
+    {
+        $request->validate([
+            'email' => 'required|email',
+        ]);
+        $user = User::where('email', $request->email)->first();
+        if (!$user) {
+            return redirect()->back()->with('error', 'User not found.');
+        }
+
+        return redirect()->back()->with('success', 'Password reset link sent to your email.');
     }
 }
