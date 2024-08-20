@@ -83,7 +83,7 @@ class homeController extends Controller
             return response()->json('Shipment not found.', 404);
         }
 
-        $location = $shipment->container->locations->last();
+        $location = $shipment->container->location->last();
 
         if ($location && !is_null($location->pivot->expected_arrival_date)) {
             $shipment->delivered_date = $location->pivot->expected_arrival_date;
