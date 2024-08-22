@@ -65,6 +65,15 @@
     <input type="number" class="form-control" id="weight" name="weight"
         value="{{ old('weight', $shipment->weight) }}" required>
 </div>
+<div class="mb-3">
+    <label for="status" class="form-label">الحالة</label>
+    <select class="form-select" id="status" name="status" required>
+        <option value="pending" {{ old('status', $shipment->status) == 'pending' ? 'selected' : '' }}>قيد الانتظار
+        </option>
+        <option value="delivered" {{ old('status', $shipment->status) == 'delivered' ? 'selected' : '' }}>تم التسليم
+        </option>
+    </select>
+</div>
 
 <div class="mb-3">
     <label for="dimensions" class="form-label">مكعب (متر)</label>

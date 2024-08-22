@@ -17,6 +17,7 @@ return new class extends Migration {
             $table->bigInteger('container_id')->unsigned();
             $table->foreign('container_id')->references('id')->on('containers')->onDelete('cascade');
             $table->enum('type', ['aerial', 'ground', 'nautical'])->default('nautical');
+            $table->enum('status',['pending', 'sent', 'delivered'])->default('pending');
             $table->string('tracking_number', 50)->unique();
             $table->string('sent_area');
             $table->string('delivered_area');
