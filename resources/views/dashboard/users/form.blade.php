@@ -18,6 +18,20 @@
         value="{{ old('address', $user->address) }}" required>
 </div>
 <div class="mb-3">
+    <label for="city" class="form-label">المدينة</label>
+    <input type="text" class="form-control" id="city" name="city"
+        value="{{ old('city', $user->city) }}" required>
+</div>
+<div class="mb-3">
+    <label for="type_of_work" class="form-label">نوع العمل</label>
+    <select class="form-select" id="type_of_work" name="type_of_work" required>
+        <option value="تاجر" {{ old('type_of_work', $user->type_of_work) == 'تاجر' ? 'selected' : '' }}>تاجر</option>
+        <option value="شركة" {{ old('type_of_work', $user->type_of_work) == 'شركة' ? 'selected' : '' }}>شركة</option>
+        <option value="صاحب متجر" {{ old('type_of_work', $user->type_of_work) == 'صاحب متجر' ? 'selected' : '' }}>صاحب متجر</option>
+        <option value="صاحب محل" {{ old('type_of_work', $user->type_of_work) == 'صاحب محل' ? 'selected' : '' }}>صاحب محل</option>
+    </select>
+</div>    
+<div class="mb-3">
     <label for="role" class="form-label">الصلاحية</label>
     <select class="form-select" id="role" name="role" required>
         <option value="admin" {{ old('role', $user->role) == 'admin' ? 'selected' : '' }}>Admin</option>

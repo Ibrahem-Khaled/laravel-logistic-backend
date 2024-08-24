@@ -26,6 +26,8 @@
                         <th>الاسم</th>
                         <th>البريد الإلكتروني</th>
                         <th>الهاتف</th>
+                        <th>المدينة</th>
+                        <th>نوع العمل</th>
                         <th>العنوان</th>
                         <th>الدور</th>
                         <th>الصورة الرمزية</th>
@@ -38,6 +40,8 @@
                             <td>{{ $user->name }}</td>
                             <td>{{ $user->email }}</td>
                             <td>{{ $user->phone }}</td>
+                            <td>{{ $user->city }}</td>
+                            <td>{{ $user->type_of_work }}</td>
                             <td>{{ $user->address }}</td>
                             <td>{{ $user->role }}</td>
                             <td>
