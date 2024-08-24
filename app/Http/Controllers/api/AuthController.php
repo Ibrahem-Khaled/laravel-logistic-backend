@@ -55,6 +55,10 @@ class AuthController extends Controller
     public function update(Request $request)
     {
         $user = Auth::guard('api')->user();
+        if (!$user) {
+            return response()->json(['error' => 'User not authenticated'], 401);
+        }
+
         $request->validate([
             'name' => 'nullable|string|max:255',
             'email' => 'nullable|string|email|max:255',
@@ -62,7 +66,7 @@ class AuthController extends Controller
         ]);
         User::where('id', $user->id)->update($request->all());
 
-        return response()->json(['user' => $user, 'message' => 'Profile updated successfully'], 200);
+        return response()->json('Profile updated successfully', 200);
     }
 
     public function changePassword(Request $request)
