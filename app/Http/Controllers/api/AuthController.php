@@ -54,7 +54,7 @@ class AuthController extends Controller
 
     public function update(Request $request)
     {
-        $user = Auth::guard('api')->user();
+        $user = JWTAuth::parseToken()->authenticate();
         $request->validate([
             'name' => 'nullable|string|max:255',
             'email' => 'nullable|string|email|max:255',
@@ -67,7 +67,7 @@ class AuthController extends Controller
 
     public function changePassword(Request $request)
     {
-        $user = JWTAuth::parseToken()->authenticate();
+        $user = Auth::guard('api')->user();
 
         $request->validate([
             'old_password' => 'required|string',
