@@ -17,6 +17,7 @@ return new class extends Migration {
             $table->string('phone')->unique()->nullable();
             $table->string('avatar')->nullable();
             $table->string('address')->nullable();
+            $table->string('country')->nullable();
             $table->string('city')->nullable();
             $table->string('type_of_work')->nullable();
             $table->enum('role', ['admin', 'user', 'driver', 'manager', 'company'])->default('user');
