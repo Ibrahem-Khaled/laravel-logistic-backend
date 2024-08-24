@@ -56,7 +56,8 @@ class AuthController extends Controller
     {
         $user = Auth::guard('api')->user();
         $request->validate([
-            'email' => 'nullable|string|email|max:255|unique:users,email,' . $user->id,
+            'name' => 'nullable|string|max:255',
+            'email' => 'nullable|string|email|max:255',
             'phone' => 'nullable|numeric',
         ]);
         $user->update($request->all());
