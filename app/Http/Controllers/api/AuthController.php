@@ -54,13 +54,13 @@ class AuthController extends Controller
 
     public function update(Request $request)
     {
-        $user = JWTAuth::parseToken()->authenticate();
+        $user = Auth::guard('api')->user();
         $request->validate([
             'name' => 'nullable|string|max:255',
             'email' => 'nullable|string|email|max:255',
             'phone' => 'nullable|numeric',
         ]);
-        $user->update($request->all());
+        User::where('id', $user->id)->update($request->all());
 
         return response()->json(['user' => $user, 'message' => 'Profile updated successfully'], 200);
     }
