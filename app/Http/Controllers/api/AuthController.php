@@ -67,7 +67,7 @@ class AuthController extends Controller
 
     public function changePassword(Request $request)
     {
-        $user = Auth::guard('api')->user();
+        $user = JWTAuth::parseToken()->authenticate();
 
         $request->validate([
             'old_password' => 'required|string',
