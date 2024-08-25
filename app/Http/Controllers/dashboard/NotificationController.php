@@ -25,14 +25,14 @@ class NotificationController extends Controller
         ]);
 
         $users = User::all();
-        $expoPushTokens = [];
-        foreach ($users as $user) {
-            if ($user->expo_push_token) {
-                $expoPushTokens[] = $user->expo_push_token;
-            }
-        }
+        // $expoPushTokens = [];
+        // foreach ($users as $user) {
+        //     if ($user->expo_push_token) {
+        //         $expoPushTokens[] = $user->expo_push_token;
+        //     }
+        // }
 
-        Notification::send($users, new ExpoNotification($expoPushTokens, $request->title, $request->body));
+        // Notification::send($users, new ExpoNotification($expoPushTokens, $request->title, $request->body));
         NotificationModel::create([
             'title' => $request->title,
             'body' => $request->body,
