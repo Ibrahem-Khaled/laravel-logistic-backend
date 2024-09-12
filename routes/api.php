@@ -23,6 +23,7 @@ Route::post('update', [AuthController::class, 'update']);
 Route::get('user', [AuthController::class, 'user']);
 Route::post('logout', [AuthController::class, 'logout']);
 Route::post('change-password', [AuthController::class, 'changePassword']);
+Route::post('deleteAccount', [AuthController::class, 'deleteAccount']);
 
 
 Route::group([], function () {

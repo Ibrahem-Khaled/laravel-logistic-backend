@@ -112,4 +112,14 @@ class AuthController extends Controller
             return response()->json(['error' => 'Failed to logout, please try again'], 500);
         }
     }
+
+    public function deleteAccount(Request $request)
+    {
+        $user = Auth::guard('api')->user();
+        if (!$user) {
+            return response()->json(['error' => 'User not authenticated'], 401);
+        }
+        $user->delete();
+        return response()->json(['message' => 'Account deleted successfully'], 200);
+    }
 }
