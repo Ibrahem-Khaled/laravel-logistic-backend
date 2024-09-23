@@ -28,9 +28,10 @@ class NotificationController extends Controller
         foreach ($users as $user) {
             if ($user->expo_push_token) {
                 // إرسال الإشعار لكل مستخدم على حدة باستخدام التوكين الخاص به
-                Notification::send($user, new ExpoNotification([$user->expo_push_token], 'تحديث موقع الحاوية', "تم تحديث موقع شحنتك. الرجاء التحقق من التفاصيل."));
+                Notification::send($user, new ExpoNotification([$user->expo_push_token], $request->title, $request->body));
             }
         }
+
         NotificationModel::create([
             'title' => $request->title,
             'body' => $request->body,
