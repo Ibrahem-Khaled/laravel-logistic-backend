@@ -50,6 +50,13 @@ class NotificationController extends Controller
         ]);
 
         $notification = NotificationModel::findOrFail($id);
+        $users = User::all();
+        foreach ($users as $user) {
+            if ($user->expo_push_token) {
+                // إرسال الإشعار لكل مستخدم على حدة باستخدام التوكين الخاص به
+                Notification::send($user, new ExpoNotification([$user->expo_push_token], $request->title, $request->body));
+            }
+        }
         $notification->update($request->all());
         return redirect()->back()->with('success', 'Notification updated successfully.');
     }
