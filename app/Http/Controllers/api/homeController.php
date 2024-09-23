@@ -139,9 +139,6 @@ class homeController extends Controller
     public function notificatins()
     {
         $notifications = Notfication::all();
-        if ($notifications->count() == 0) {
-            return response()->json('No notifications found.', 404);
-        }
         return response()->json($notifications, 200);
     }
 }
