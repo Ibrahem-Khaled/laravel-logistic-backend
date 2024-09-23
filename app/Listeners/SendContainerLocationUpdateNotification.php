@@ -26,11 +26,12 @@ class SendContainerLocationUpdateNotification
         $container = $event->container;
         $shipments = $container->shipments;
         $users = $shipments->pluck('user')->unique();
-    
+
         foreach ($users as $user) {
             if ($user->expo_push_token) {
                 // إرسال الإشعار لكل مستخدم على حدة باستخدام التوكين الخاص به
                 Notification::send($user, new ExpoNotification([$user->expo_push_token], 'تحديث موقع الحاوية', "تم تحديث موقع شحنتك. الرجاء التحقق من التفاصيل."));
             }
         }
+    }
 }
