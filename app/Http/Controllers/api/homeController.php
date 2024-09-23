@@ -62,11 +62,27 @@ class homeController extends Controller
 
     public function shipment($shipmentId)
     {
+        // جلب الشحنة مع البيانات المرتبطة بالحاوية والموقع
         $shipment = Shipment::with('container.location')->find($shipmentId);
 
+        // التحقق من وجود الشحنة
         if (!$shipment) {
             return response()->json('Shipment not found.', 404);
         }
+
+        // التحقق من وجود الحاوية والموقع
+        if ($shipment->container && $shipment->container->location->isNotEmpty()) {
+            // جلب الموقع الأخير من مواقع الحاوية
+            $lastLocation = $shipment->container->location->last();
+
+            // التحقق من وجود الموقع وتاريخ الوصول المتوقع
+            if ($lastLocation && !is_null($lastLocation->pivot->expected_arrival_date)) {
+                // تعديل تاريخ الإنشاء ليكون تاريخ الوصول المتوقع
+                $shipment->created_at = $lastLocation->pivot->expected_arrival_date;
+            }
+        }
+
+        // إعادة الشحنة بعد التعديل
         return response()->json($shipment, 200);
     }
 
