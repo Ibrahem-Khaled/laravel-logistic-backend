@@ -139,7 +139,10 @@ class homeController extends Controller
     public function notificatins()
     {
         $user = auth()->guard('api')->user();
-        $userNotifications = Notfication::where('user_id', $user->id)->orWhereNull('user_id')->get();
+        $userNotifications = Notfication::where('user_id', $user->id)
+        ->orWhereNull('user_id')
+        ->sortedByDesc('created_at')
+        ->get();
 
         $user->notifications()->where('is_read', 0)->update(['is_read' => 1]);
         return response()->json($userNotifications, 200);
