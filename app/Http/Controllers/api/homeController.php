@@ -147,4 +147,13 @@ class homeController extends Controller
         $user->notifications()->where('is_read', 0)->update(['is_read' => 1]);
         return response()->json($userNotifications, 200);
     }
+
+    public function notificatinsCount()
+    {
+        $user = auth()->guard('api')->user();
+        $userNotifications = Notfication::where('user_id', $user->id)
+            ->where('is_read', 0)
+            ->count();
+        return response()->json($userNotifications, 200);
+    }
 }

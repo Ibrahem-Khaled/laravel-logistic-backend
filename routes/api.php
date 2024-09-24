@@ -36,6 +36,7 @@ Route::group([], function () {
     Route::get('shipments/delivered', [homeController::class, 'deliveredShipments']);
     Route::get('slides', [homeController::class, 'slides']);
     Route::get('notificatins', [homeController::class, 'notificatins']);
+    Route::get('notificatins/count', [homeController::class, 'notificatinsCount']);
 
     //store contact us message 
     Route::post('contact-us', [ContactUsController::class, 'store']);
