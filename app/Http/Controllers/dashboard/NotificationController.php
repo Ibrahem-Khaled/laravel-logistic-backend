@@ -13,7 +13,7 @@ class NotificationController extends Controller
 {
     public function index()
     {
-        $notifications = NotificationModel::all();
+        $notifications = NotificationModel::whereNull('user_id')->get();
         return view('dashboard.notifications', compact('notifications'));
     }
 
