@@ -140,9 +140,9 @@ class homeController extends Controller
     {
         $user = auth()->guard('api')->user();
         $userNotifications = Notfication::where('user_id', $user->id)
-        ->orWhereNull('user_id')
-        ->sortedByDesc('created_at')
-        ->get();
+            ->orWhereNull('user_id')
+            ->orderByDesc('created_at') // ترتيب الإشعارات من الأحدث إلى الأقدم
+            ->get();
 
         $user->notifications()->where('is_read', 0)->update(['is_read' => 1]);
         return response()->json($userNotifications, 200);
