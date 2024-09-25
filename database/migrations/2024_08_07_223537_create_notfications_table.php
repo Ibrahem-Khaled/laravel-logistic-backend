@@ -13,10 +13,12 @@ return new class extends Migration {
         Schema::create('notfications', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('user_id')->nullable();
+            $table->bigInteger('shipment_id')->nullable();
             $table->boolean('is_read')->default(0);
             $table->string('title');
             $table->string('body');
             $table->string('image')->nullable();
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
     }

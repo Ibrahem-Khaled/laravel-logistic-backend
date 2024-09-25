@@ -35,6 +35,7 @@ class SendContainerLocationUpdateNotification
                     'title' => 'تحديث موقع الحاوية',
                     'body' => 'تم تحديث موقع شحنتك. الرجاء التحقق من التفاصيل.',
                     'user_id' => $user->id,
+                    'shipment_id' => $user->shipments()->first()->id
                 ]);
                 // إرسال الإشعار لكل مستخدم على حدة باستخدام التوكين الخاص به
                 Notification::send($user, new ExpoNotification([$user->expo_push_token], 'تحديث موقع الحاوية', "تم تحديث موقع شحنتك. الرجاء التحقق من التفاصيل."));
