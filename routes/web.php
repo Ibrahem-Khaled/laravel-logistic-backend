@@ -10,6 +10,8 @@ use App\Http\Controllers\dashboard\ShipmentTrackingController;
 use App\Http\Controllers\dashboard\SliderController;
 use App\Http\Controllers\dashboard\UserController;
 use App\Http\Controllers\homeController;
+use App\Http\Controllers\WebArController;
+use App\Http\Controllers\WebEnController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -28,14 +30,16 @@ Route::post('login', [AuthController::class, 'customLogin'])->name('customLogin'
 Route::get('register', [AuthController::class, 'register'])->name('register');
 Route::post('register', [AuthController::class, 'customRegister'])->name('customRegister');
 Route::post('logout', [AuthController::class, 'logout'])->name('logout');
-Route::get('profile', [AuthController::class, 'profile'])->name('proflie')->middleware('auth');
+Route::get('profile', [AuthController::class, 'profile'])->name('profile')->middleware('auth');
 Route::post('/profile', [AuthController::class, 'update'])->name('profile.update');
 Route::get('forget-password', [AuthController::class, 'forgetPassword'])->name('forgetPassword');
 Route::post('resetPassword', [AuthController::class, 'resetPassword'])->name('resetPassword');
 
-Route::group(['middleware' => ['auth', 'isAdmin']], function () {
+Route::get('/', [homeController::class, 'home'])->name('home');
 
-    Route::get('/', [homeController::class, 'index'])->name('home');
+Route::group(['middleware' => ['auth', 'isAdmin'], 'prefix' => 'dashboard'], function () {
+
+    Route::get('/', [homeController::class, 'index'])->name('home.dashboard');
 
     //this route users
     Route::resource('users', UserController::class);
@@ -62,5 +66,7 @@ Route::group(['middleware' => ['auth', 'isAdmin']], function () {
     //this route notifications
     Route::resource('notifications', NotificationController::class);
 
+    Route::resource('web-ens', WebEnController::class);
+    Route::resource('web-ars', WebArController::class);
 
 });

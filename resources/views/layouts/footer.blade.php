@@ -17,10 +17,12 @@
             <div class="col-md-6">
                 <ul class="nav nav-footer justify-content-center justify-content-md-end">
                     <li class="nav-item">
-                        <a href="https://www.linkedin.com/in/ibrahim-khalid-b1a76223a" class="nav-link text-muted" target="_blank">LinkedIn</a>
+                        <a href="https://www.linkedin.com/in/ibrahimkhalid" class="nav-link text-muted"
+                            target="_blank">LinkedIn</a>
                     </li>
                     <li class="nav-item">
-                        <a href="https://github.com/Ibrahem-Khaled" class="nav-link text-muted" target="_blank">GitHub</a>
+                        <a href="https://github.com/ibrahimkhalid" class="nav-link text-muted"
+                            target="_blank">GitHub</a>
                     </li>
                     <li class="nav-item">
                         <a href="/about" class="nav-link text-muted" target="_blank">About Me</a>
@@ -33,27 +35,3 @@
         </div>
     </div>
 </footer>
-
-<!-- CSS لتنسيق الفوتر -->
-<style>
-    .footer {
-        background-color: #f8f9fa;
-        padding: 20px 0;
-        border-top: 1px solid #e7e7e7;
-    }
-
-    .footer .nav-footer .nav-link {
-        font-size: 0.875rem;
-        color: #6c757d;
-        transition: color 0.2s ease-in-out;
-    }
-
-    .footer .nav-footer .nav-link:hover {
-        color: #343a40;
-    }
-
-    .footer .font-weight-bold {
-        font-weight: 600;
-        color: #343a40;
-    }
-</style>

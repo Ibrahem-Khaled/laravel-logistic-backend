@@ -4,7 +4,7 @@
     <div class="container mt-5">
         <div class="d-flex justify-content-between align-items-center mb-3">
             <h3>السلايدر</h3>
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addSliderModal">
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addSliderModal">
                 إضافة سلايدر
             </button>
         </div>
@@ -40,12 +40,12 @@
                             </td>
                             <td>{{ $slider->link }}</td>
                             <td>
-                                <button type="button" class="btn btn-warning" data-bs-toggle="modal"
-                                    data-bs-target="#editSliderModal{{ $slider->id }}">
+                                <button type="button" class="btn btn-warning" data-toggle="modal"
+                                    data-target="#editSliderModal{{ $slider->id }}">
                                     تعديل
                                 </button>
-                                <button type="button" class="btn btn-danger" data-bs-toggle="modal"
-                                    data-bs-target="#deleteConfirmationModal{{ $slider->id }}">
+                                <button type="button" class="btn btn-danger" data-toggle="modal"
+                                    data-target="#deleteConfirmationModal{{ $slider->id }}">
                                     حذف
                                 </button>
                             </td>
@@ -58,7 +58,7 @@
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <h5 class="modal-title" id="editSliderModalLabel">تعديل السلايدر</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        <button type="button" class="btn-close" data-dismiss="modal"
                                             aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
@@ -92,7 +92,7 @@
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary"
-                                                    data-bs-dismiss="modal">إغلاق</button>
+                                                    data-dismiss="modal">إغلاق</button>
                                                 <button type="submit" class="btn btn-primary">حفظ التغييرات</button>
                                             </div>
                                         </form>
@@ -108,7 +108,7 @@
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <h5 class="modal-title" id="deleteConfirmationModalLabel">تأكيد الحذف</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        <button type="button" class="btn-close" data-dismiss="modal"
                                             aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
@@ -116,7 +116,7 @@
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary"
-                                            data-bs-dismiss="modal">إلغاء</button>
+                                            data-dismiss="modal">إلغاء</button>
                                         <form action="{{ route('sliders.destroy', $slider->id) }}" method="POST"
                                             class="d-inline">
                                             @csrf
@@ -139,7 +139,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="addSliderModalLabel">إضافة سلايدر</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <form action="{{ route('sliders.store') }}" method="POST" enctype="multipart/form-data">
@@ -161,7 +161,7 @@
                             <input type="text" class="form-control" id="link" name="link">
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إغلاق</button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">إغلاق</button>
                             <button type="submit" class="btn btn-primary">إضافة سلايدر</button>
                         </div>
                     </form>

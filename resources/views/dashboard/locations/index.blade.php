@@ -4,7 +4,7 @@
     <div class="container mt-5">
         <div class="d-flex justify-content-between align-items-center mb-3">
             <h3>المواقع</h3>
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addLocationModal">
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addLocationModal">
                 إضافة موقع
             </button>
         </div>
@@ -32,16 +32,16 @@
                             <td>{{ $location->address }}</td>
                             <td>{{ $location->region }}</td>
                             <td>
-                                <button type="button" class="btn btn-warning" data-bs-toggle="modal"
-                                    data-bs-target="#editLocationModal{{ $location->id }}">
+                                <button type="button" class="btn btn-warning" data-toggle="modal"
+                                    data-target="#editLocationModal{{ $location->id }}">
                                     تعديل
                                 </button>
                                 <form action="{{ route('locations.destroy', $location->id) }}" method="POST"
                                     class="d-inline">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="button" class="btn btn-danger" data-bs-toggle="modal"
-                                        data-bs-target="#deleteConfirmationModal{{ $location->id }}">حذف</button>
+                                    <button type="button" class="btn btn-danger" data-toggle="modal"
+                                        data-target="#deleteConfirmationModal{{ $location->id }}">حذف</button>
                                 </form>
                             </td>
                         </tr>
@@ -53,7 +53,7 @@
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <h5 class="modal-title" id="editLocationModalLabel">تعديل الموقع</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        <button type="button" class="btn-close" data-dismiss="modal"
                                             aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
@@ -63,7 +63,7 @@
                                             @include('dashboard.locations.form', ['location' => $location])
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary"
-                                                    data-bs-dismiss="modal">إغلاق</button>
+                                                    data-dismiss="modal">إغلاق</button>
                                                 <button type="submit" class="btn btn-primary">حفظ التغييرات</button>
                                             </div>
                                         </form>
@@ -79,7 +79,7 @@
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <h5 class="modal-title" id="deleteConfirmationModalLabel">تأكيد الحذف</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        <button type="button" class="btn-close" data-dismiss="modal"
                                             aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
@@ -87,7 +87,7 @@
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary"
-                                            data-bs-dismiss="modal">إلغاء</button>
+                                            data-dismiss="modal">إلغاء</button>
                                         <form action="{{ route('locations.destroy', $location->id) }}" method="POST"
                                             class="d-inline">
                                             @csrf
@@ -113,14 +113,14 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="addLocationModalLabel">إضافة موقع</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <form action="{{ route('locations.store') }}" method="POST">
                         @csrf
                         @include('dashboard.locations.form', ['location' => new App\Models\Location()])
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إغلاق</button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">إغلاق</button>
                             <button type="submit" class="btn btn-primary">حفظ التغييرات</button>
                         </div>
                     </form>

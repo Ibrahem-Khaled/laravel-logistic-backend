@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Shipment;
 use App\Models\User;
+use App\Models\WebEn;
 use Illuminate\Http\Request;
 
 class homeController extends Controller
@@ -14,6 +15,13 @@ class homeController extends Controller
         $totalShipments = Shipment::count();
         $recentActivities = []; // يمكنك استبدالها بالأنشطة الحقيقية
 
-        return view('home', compact('totalUsers', 'totalShipments', 'recentActivities'));
+        return view('dashboard.index', compact('totalUsers', 'totalShipments', 'recentActivities'));
+    }
+
+    public function home()
+    {
+        $clients = User::whereIn('role', ['company', 'user', 'driver', 'manager', 'company'])->get();
+        $web = WebEn::first();
+        return view('home', compact('clients', 'web'));
     }
 }

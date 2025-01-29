@@ -4,7 +4,7 @@
     <div class="container mt-5">
         <div class="d-flex justify-content-between align-items-center mb-3">
             <h3>تتبع الشحنات</h3>
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addShipmentTrackingModal">
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addShipmentTrackingModal">
                 إضافة تتبع
             </button>
         </div>
@@ -39,13 +39,13 @@
                             </td>
                             </td>
                             <td>
-                                <button type="button" class="btn btn-warning" data-bs-toggle="modal"
-                                    data-bs-target="#editShipmentTrackingModal{{ $shipmentTracking->id }}">
+                                <button type="button" class="btn btn-warning" data-toggle="modal"
+                                    data-target="#editShipmentTrackingModal{{ $shipmentTracking->id }}">
                                     تعديل
                                 </button>
                                 <!-- Delete Button triggers the confirmation modal -->
-                                <button type="button" class="btn btn-danger" data-bs-toggle="modal"
-                                    data-bs-target="#deleteConfirmationModal{{ $shipmentTracking->id }}">
+                                <button type="button" class="btn btn-danger" data-toggle="modal"
+                                    data-target="#deleteConfirmationModal{{ $shipmentTracking->id }}">
                                     حذف
                                 </button>
                             </td>
@@ -58,7 +58,7 @@
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <h5 class="modal-title" id="editShipmentTrackingModalLabel">تعديل التتبع</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        <button type="button" class="btn-close" data-dismiss="modal"
                                             aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
@@ -71,7 +71,7 @@
                                             ])
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary"
-                                                    data-bs-dismiss="modal">إغلاق</button>
+                                                    data-dismiss="modal">إغلاق</button>
                                                 <button type="submit" class="btn btn-primary">حفظ التغييرات</button>
                                             </div>
                                         </form>
@@ -87,7 +87,7 @@
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <h5 class="modal-title" id="deleteConfirmationModalLabel">تأكيد الحذف</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        <button type="button" class="btn-close" data-dismiss="modal"
                                             aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
@@ -95,7 +95,7 @@
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary"
-                                            data-bs-dismiss="modal">إلغاء</button>
+                                            data-dismiss="modal">إلغاء</button>
                                         <form action="{{ route('shipment_trackings.destroy', $shipmentTracking->id) }}"
                                             method="POST" class="d-inline">
                                             @csrf
@@ -122,7 +122,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="addShipmentTrackingModalLabel">إضافة تتبع</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <form action="{{ route('shipment_trackings.store') }}" method="POST">
@@ -131,7 +131,7 @@
                             'shipmentTracking' => new App\Models\ShipmentTracking(),
                         ])
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إغلاق</button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">إغلاق</button>
                             <button type="submit" class="btn btn-primary">حفظ التغييرات</button>
                         </div>
                     </form>
