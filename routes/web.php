@@ -70,3 +70,10 @@ Route::group(['middleware' => ['auth', 'isAdmin'], 'prefix' => 'dashboard'], fun
     Route::resource('web-ars', WebArController::class);
 
 });
+
+Route::get('locale/{lang}', function ($lang) {
+    App::setLocale($lang);
+    session()->put('locale', $lang);
+
+    return redirect()->back();
+})->name('locale');

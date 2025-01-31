@@ -7,13 +7,12 @@
             <div class="col-lg-6 order-2 order-lg-1 d-flex flex-column justify-content-center">
                 <h2 data-aos="fade-up">{{ $web->hero_title ?? '' }}</h2>
                 <p data-aos="fade-up" data-aos-delay="100">{{ $web->hero_description ?? '' }}</p>
-
                 <!-- نموذج البحث -->
                 <form id="tracking-form" class="form-search d-flex align-items-stretch mb-3" data-aos="fade-up"
                     data-aos-delay="200">
                     <!-- اختيار الشركة -->
                     <select id="company" class="form-select me-2" required>
-                        <option value="" disabled selected>Select Company</option>
+                        <option value="" disabled selected>{{ __('messages.select_company') }}</option>
                         <option value="fedex">FedEx</option>
                         <option value="dhl">DHL</option>
                         <option value="ups">UPS</option>
@@ -22,20 +21,20 @@
 
                     <!-- إدخال رقم التتبع -->
                     <input type="text" id="tracking-number" class="form-control"
-                        placeholder="Enter your tracking number" required>
+                        placeholder="{{ __('messages.enter_tracking_number') }}" required>
 
                     <!-- زر البحث -->
                     <button type="submit" class="btn btn-primary justify-content-center">
-                        <i class="fas fa-search"></i> Search
+                        <i class="fas fa-search"></i> {{ __('messages.search') }}
                     </button>
                 </form>
 
                 <!-- رسالة التحميل -->
                 <div id="loading" class="text-center mt-3" style="display: none;">
                     <div class="spinner-border text-primary" role="status">
-                        <span class="visually-hidden">Loading...</span>
+                        <span class="visually-hidden">{{ __('messages.loading') }}</span>
                     </div>
-                    <p class="mt-2">Searching for your shipment...</p>
+                    <p class="mt-2">{{ __('messages.searching') }}</p>
                 </div>
 
                 <!-- رسالة الخطأ -->
@@ -43,7 +42,7 @@
 
                 <!-- أسماء الشركات العالمية -->
                 <div class="companies mt-4" data-aos="fade-up" data-aos-delay="300">
-                    <h6 class="text-white mb-3">Supported Companies:</h6>
+                    <h6 class="text-white mb-3">{{ __('messages.supported_companies') }}</h6>
                     <div class="d-flex flex-wrap gap-3">
                         <div class="company-item">
                             <img src="https://cdn-icons-png.flaticon.com/128/5977/5977583.png" alt="FedEx"
@@ -56,12 +55,12 @@
                             <span>DHL</span>
                         </div>
                         <div class="company-item">
-                            <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.explicit.bing.net%2Fth%3Fid%3DOIP.tTfM3fLSkTp94QDMxb3xwQHaIr%26pid%3DApi&f=1&ipt=7dc97e09b203583001e9698d8f2383f292f844078ff011c70a557c09120e4437&ipo=images"
+                            <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.explicit.bing.net%2Fth%3Fid%3DOIP.tTfM3fLSkTp94QDMxb3xwQHaIr%26pid%3DApi&f=1"
                                 alt="UPS" class="company-logo">
                             <span>UPS</span>
                         </div>
                         <div class="company-item">
-                            <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.p4mwWAdJFW9RiBFq-OSCPgHaHa%26pid%3DApi&f=1&ipt=71efb304575615ccbd6cf2c481bf6b3fc7bf66a93a44817353dd502f83923549&ipo=images"
+                            <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.p4mwWAdJFW9RiBFq-OSCPgHaHa%26pid%3DApi&f=1"
                                 alt="Aramex" class="company-logo">
                             <span>Aramex</span>
                         </div>
@@ -73,19 +72,19 @@
                     <div class="col-lg-3 col-6">
                         <div class="stats-item text-center w-100 h-100">
                             <span>+1000</span>
-                            <p>Clients</p>
+                            <p>{{ __('messages.clients') }}</p>
                         </div>
                     </div>
                     <div class="col-lg-3 col-6">
                         <div class="stats-item text-center w-100 h-100">
                             <span>+50K</span>
-                            <p>Shipments</p>
+                            <p>{{ __('messages.shipments') }}</p>
                         </div>
                     </div>
                     <div class="col-lg-3 col-6">
                         <div class="stats-item text-center w-100 h-100">
-                            <span>+ 10</span>
-                            <p>Workers</p>
+                            <span>+10</span>
+                            <p>{{ __('messages.workers') }}</p>
                         </div>
                     </div>
                 </div>
@@ -99,6 +98,7 @@
         </div>
     </div>
 </section><!-- /Hero Section -->
+
 <script>
     document.getElementById('company').addEventListener('change', function() {
         if (this.value === "") {

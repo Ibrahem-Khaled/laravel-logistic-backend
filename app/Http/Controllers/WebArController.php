@@ -18,7 +18,7 @@ class WebArController extends Controller
     public function store(Request $request)
     {
         // تحقق من الصحة
-        $request->validate([
+       $validated = $request->validate([
             'site_title' => 'nullable|string',
             'site_description' => 'nullable|string',
             'site_image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
@@ -34,6 +34,7 @@ class WebArController extends Controller
             'location_description' => 'nullable|string',
             'location_image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
+        $validated['about_features'] = json_decode($validated['about_features'], true);
 
         // معالجة الصور وحفظها
         $data = $request->all();
@@ -57,10 +58,12 @@ class WebArController extends Controller
     }
 
     // تحديث البيانات
-    public function update(Request $request, WebEn $webEn)
+    public function update(Request $request, $webEn)
     {
+        $webEn = WebEn::findOrFail($webEn);
+
         // تحقق من الصحة
-        $request->validate([
+       $validated = $request->validate([
             'site_title' => 'nullable|string',
             'site_description' => 'nullable|string',
             'site_image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
@@ -76,6 +79,7 @@ class WebArController extends Controller
             'location_description' => 'nullable|string',
             'location_image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
+        $validated['about_features'] = json_decode($validated['about_features'], true);
 
         // معالجة الصور وحفظها
         $data = $request->all();
@@ -96,6 +100,7 @@ class WebArController extends Controller
             Storage::disk('public')->delete($webEn->location_image); // حذف الصورة القديمة
             $data['location_image'] = $request->file('location_image')->store('images', 'public');
         }
+        $webEn->about_features = json_decode($request->about_features, true);
 
         // تحديث السجل
         $webEn->update($data);

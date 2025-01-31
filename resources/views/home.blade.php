@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="{{ app()->getLocale() == 'ar' ? 'rtl' : 'ltr' }}">
 
 <head>
     <meta charset="utf-8">
@@ -28,6 +28,7 @@
     <style>
         html {
             scroll-behavior: smooth;
+
         }
     </style>
 </head>
@@ -52,32 +53,22 @@
                         <p>
                             {{ $web->about_description ?? '' }}
                         </p>
-                        <ul>
-                            <li>
-                                <i class="bi bi-diagram-3"></i>
-                                <div>
-                                    <h5>Ullamco laboris nisi ut aliquip consequat</h5>
-                                    <p>Magni facilis facilis repellendus cum excepturi quaerat praesentium libre trade
-                                    </p>
-                                </div>
-                            </li>
-                            <li>
-                                <i class="bi bi-fullscreen-exit"></i>
-                                <div>
-                                    <h5>Magnam soluta odio exercitationem reprehenderi</h5>
-                                    <p>Quo totam dolorum at pariatur aut distinctio dolorum laudantium illo direna
-                                        pasata redi</p>
-                                </div>
-                            </li>
-                            <li>
-                                <i class="bi bi-broadcast"></i>
-                                <div>
-                                    <h5>Voluptatem et qui exercitationem</h5>
-                                    <p>Et velit et eos maiores est tempora et quos dolorem autem tempora incidunt maxime
-                                        veniam</p>
-                                </div>
-                            </li>
-                        </ul>
+                        @if ($web->about_features)
+                            <ul>
+                                @foreach (json_decode($web->about_features, true) as $feature)
+                                    <li>
+                                        <i class="bi bi-broadcast"></i>
+                                        <div>
+                                            <h5>{{ $feature['title'] ?? 'بدون عنوان' }}</h5>
+                                            <p>{{ $feature['description'] ?? 'بدون وصف' }}</p>
+                                        </div>
+                                    </li>
+                                @endforeach
+                            </ul>
+                        @else
+                            <p>لا توجد ميزات مضافة</p>
+                        @endif
+
                     </div>
                 </div>
             </div>
@@ -85,12 +76,11 @@
 
         <!-- Services Section -->
         <section id="services" class="services section">
-
             <!-- Section Title -->
             <div class="container section-title" data-aos="fade-up">
-                <span>Our Services<br></span>
-                <h2>Our Services</h2>
-                <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
+                <span>{{ __('messages.our_services') }}<br></span>
+                <h2>{{ __('messages.our_services') }}</h2>
+                <p>{{ __('messages.services_description') }}</p>
             </div><!-- End Section Title -->
 
             <div class="container">
@@ -102,9 +92,8 @@
                             <div class="card-img">
                                 <img src="assets/img/service-1.jpg" alt="" class="img-fluid">
                             </div>
-                            <h3>Storage</h3>
-                            <p>Cumque eos in qui numquam. Aut aspernatur perferendis sed atque quia voluptas quisquam
-                                repellendus temporibus itaque officiis odit</p>
+                            <h3>{{ __('messages.storage') }}</h3>
+                            <p>{{ __('messages.storage_description') }}</p>
                         </div>
                     </div><!-- End Card Item -->
 
@@ -114,12 +103,8 @@
                             <div class="card-img">
                                 <img src="assets/img/service-2.jpg" alt="" class="img-fluid">
                             </div>
-                            <h3>Express Air Freight</h3>
-                            <p>
-                                We provide fast and secure air freight solutions tailored to your urgent needs. Whether
-                                it's important documents or priority goods, we ensure they reach any destination in
-                                record time.
-                            </p>
+                            <h3>{{ __('messages.express_air_freight') }}</h3>
+                            <p>{{ __('messages.express_air_freight_description') }}</p>
                         </div>
                     </div><!-- End Card Item -->
 
@@ -129,12 +114,8 @@
                             <div class="card-img">
                                 <img src="assets/img/service-3.jpg" alt="" class="img-fluid">
                             </div>
-                            <h3>International Air Shipping</h3>
-                            <p>
-                                We bridge distances for you! With our international air shipping services, we ensure
-                                your goods are transported safely and efficiently to any destination worldwide. We
-                                handle all types of cargo with utmost confidentiality and flexibility.
-                            </p>
+                            <h3>{{ __('messages.international_air_shipping') }}</h3>
+                            <p>{{ __('messages.international_air_shipping_description') }}</p>
                         </div>
                     </div><!-- End Card Item -->
 

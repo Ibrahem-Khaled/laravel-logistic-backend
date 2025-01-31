@@ -19,7 +19,7 @@ class WebEnController extends Controller
     public function store(Request $request)
     {
         // تحقق من الصحة
-        $request->validate([
+        $validated = $request->validate([
             'site_title' => 'nullable|string',
             'site_description' => 'nullable|string',
             'site_image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
@@ -35,6 +35,8 @@ class WebEnController extends Controller
             'location_description' => 'nullable|string',
             'location_image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
+        $validated['about_features'] = json_decode($validated['about_features'], true);
+
 
         // معالجة الصور وحفظها
         $data = $request->all();
@@ -61,7 +63,7 @@ class WebEnController extends Controller
     public function update(Request $request, WebEn $webEn)
     {
         // تحقق من الصحة
-        $request->validate([
+        $validated = $request->validate([
             'site_title' => 'nullable|string',
             'site_description' => 'nullable|string',
             'site_image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
@@ -77,7 +79,8 @@ class WebEnController extends Controller
             'location_description' => 'nullable|string',
             'location_image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
-
+        
+        $validated['about_features'] = json_decode($validated['about_features'], true);
         // معالجة الصور وحفظها
         $data = $request->all();
 

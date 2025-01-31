@@ -8,18 +8,15 @@
             <div class="col-xl-10">
                 <div class="text-center">
                     <!-- العنوان المبدع -->
-                    <h3>contact us now!</h3>
+                    <h3>{{ __('messages.title') }}</h3>
 
                     <!-- الوصف المبدع -->
-                    <p>Do you have a question or need assistance? We are here to help! Contact us via WhatsApp and we
-                        will be happy to answer all your questions and support you.
-                    </p>
+                    <p>{{ __('messages.description') }}</p>
 
                     <!-- زر الواتساب -->
-                    <a class="cta-btn"
-                        href="https://wa.me/+962799102049?text=مرحبًا، أنا مهتم بالحصول على مزيد من المعلومات."
+                    <a class="cta-btn" href="https://wa.me/+962799102049?text={{ __('messages.whatsapp_message') }}"
                         target="_blank">
-                        <i class="bi bi-whatsapp"></i> Contact Us Now
+                        <i class="bi bi-whatsapp"></i> {{ __('messages.button_text') }}
                     </a>
                 </div>
             </div>
