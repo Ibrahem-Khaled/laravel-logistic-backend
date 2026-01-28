@@ -3,9 +3,9 @@
         <div class="row gy-4">
             <div class="col-lg-5 col-md-12 footer-about">
                 <a href="index.html" class="logo d-flex align-items-center">
-                    <span class="sitename">{{ $web->site_title ?? '' }}</span>
+                    <span class="sitename">{{ $web?->site_title ?? '' }}</span>
                 </a>
-                <p>{{ $web->site_description ?? '' }}</p>
+                <p>{{ $web?->site_description ?? '' }}</p>
                 <div class="social-links d-flex mt-4">
                     {{-- <a href=""><i class="bi bi-twitter-x"></i></a> --}}
                     <a href="https://www.facebook.com/share/18Bj8iXfvL/?mibextid=wwXIfr" target="_blank">

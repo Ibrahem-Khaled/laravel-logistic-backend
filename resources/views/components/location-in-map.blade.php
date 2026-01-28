@@ -2,9 +2,9 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-6">
-                <h2>{{ $web->location_title ?? '' }}</h2>
+                <h2>{{ $web?->location_title ?? '' }}</h2>
                 <p>
-                    {{ $web->location_description ?? '' }}
+                    {{ $web?->location_description ?? '' }}
                 </p>
             </div>
             <div class="col-lg-6">

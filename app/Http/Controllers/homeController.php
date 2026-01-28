@@ -22,7 +22,9 @@ class homeController extends Controller
     public function home()
     {
         $clients = User::whereIn('role', ['company', 'user', 'driver', 'manager', 'company'])->get();
-        $web = session()->get('locale') == 'ar' ? WebAr::first() : WebEn::first();
+        $web = session()->get('locale') == 'ar'
+            ? (WebAr::first() ?? new WebAr())
+            : (WebEn::first() ?? new WebEn());
         return view('home', compact('clients', 'web'));
     }
 }

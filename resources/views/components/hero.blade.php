@@ -5,8 +5,8 @@
     <div class="container">
         <div class="row gy-4 d-flex justify-content-between">
             <div class="col-lg-6 order-2 order-lg-1 d-flex flex-column justify-content-center">
-                <h2 data-aos="fade-up">{{ $web->hero_title ?? '' }}</h2>
-                <p data-aos="fade-up" data-aos-delay="100">{{ $web->hero_description ?? '' }}</p>
+                <h2 data-aos="fade-up">{{ $web?->hero_title ?? '' }}</h2>
+                <p data-aos="fade-up" data-aos-delay="100">{{ $web?->hero_description ?? '' }}</p>
                 <!-- نموذج البحث -->
                 <form id="tracking-form" class="form-search d-flex align-items-stretch mb-3" data-aos="fade-up"
                     data-aos-delay="200">

@@ -49,13 +49,13 @@
                     </div>
 
                     <div class="col-lg-6 content order-last  order-lg-first" data-aos="fade-up" data-aos-delay="100">
-                        <h3>{{ $web->about_title ?? '' }}</h3>
+                        <h3>{{ $web?->about_title ?? '' }}</h3>
                         <p>
-                            {{ $web->about_description ?? '' }}
+                            {{ $web?->about_description ?? '' }}
                         </p>
-                        @if ($web->about_features)
+                        @if ($web?->about_features)
                             <ul>
-                                @foreach (json_decode($web->about_features, true) as $feature)
+                                @foreach ((json_decode($web?->about_features, true) ?? []) as $feature)
                                     <li>
                                         <i class="bi bi-broadcast"></i>
                                         <div>
