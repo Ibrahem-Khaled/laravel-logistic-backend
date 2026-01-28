@@ -91,6 +91,35 @@
     </li>
 
     <!-- Divider -->
+    <hr class="sidebar-divider">
+
+    <!-- Heading -->
+    <div class="sidebar-heading">
+        تسعير الشحن
+    </div>
+
+    <!-- Nav Item - Countries -->
+    <li class="nav-item">
+        <a class="nav-link" href="{{ route('dashboard.countries.index') }}">
+            <i class="fas fa-fw fa-globe"></i>
+            <span>إدارة الدول</span></a>
+    </li>
+
+    <!-- Nav Item - Shipping Zones -->
+    <li class="nav-item">
+        <a class="nav-link" href="{{ route('dashboard.shipping-zones.index') }}">
+            <i class="fas fa-fw fa-map-marked-alt"></i>
+            <span>إدارة المناطق</span></a>
+    </li>
+
+    <!-- Nav Item - Rate Cards -->
+    <li class="nav-item">
+        <a class="nav-link" href="{{ route('dashboard.shipping-rate-cards.index') }}">
+            <i class="fas fa-fw fa-file-invoice-dollar"></i>
+            <span>جداول التسعير</span></a>
+    </li>
+
+    <!-- Divider -->
     <hr class="sidebar-divider d-none d-md-block">
 
     <!-- Sidebar Toggler (Sidebar) -->

@@ -9,9 +9,14 @@ use App\Http\Controllers\dashboard\ShipmentController;
 use App\Http\Controllers\dashboard\ShipmentTrackingController;
 use App\Http\Controllers\dashboard\SliderController;
 use App\Http\Controllers\dashboard\UserController;
+use App\Http\Controllers\dashboard\CountryController;
+use App\Http\Controllers\dashboard\ShippingZoneController;
+use App\Http\Controllers\dashboard\ShippingRateCardController;
+use App\Http\Controllers\dashboard\ShippingRateController;
 use App\Http\Controllers\homeController;
 use App\Http\Controllers\WebArController;
 use App\Http\Controllers\WebEnController;
+use App\Http\Controllers\ShippingQuoteController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -36,6 +41,10 @@ Route::get('forget-password', [AuthController::class, 'forgetPassword'])->name('
 Route::post('resetPassword', [AuthController::class, 'resetPassword'])->name('resetPassword');
 
 Route::get('/', [homeController::class, 'home'])->name('home');
+
+// Shipping Quote Routes
+Route::post('/shipping/quote', [ShippingQuoteController::class, 'calculate'])->name('shipping.quote');
+Route::get('/shipping/countries', [ShippingQuoteController::class, 'countries'])->name('shipping.countries');
 
 Route::group(['middleware' => ['auth', 'isAdmin'], 'prefix' => 'dashboard'], function () {
 
@@ -68,6 +77,39 @@ Route::group(['middleware' => ['auth', 'isAdmin'], 'prefix' => 'dashboard'], fun
 
     Route::resource('web-ens', WebEnController::class);
     Route::resource('web-ars', WebArController::class);
+
+    // Shipping Pricing Management
+    Route::resource('countries', CountryController::class)->names([
+        'index' => 'dashboard.countries.index',
+        'store' => 'dashboard.countries.store',
+        'update' => 'dashboard.countries.update',
+        'destroy' => 'dashboard.countries.destroy',
+    ]);
+
+    Route::resource('shipping-zones', ShippingZoneController::class)->names([
+        'index' => 'dashboard.shipping-zones.index',
+        'store' => 'dashboard.shipping-zones.store',
+        'update' => 'dashboard.shipping-zones.update',
+        'destroy' => 'dashboard.shipping-zones.destroy',
+    ]);
+    Route::post('shipping-zones/{shippingZone}/assign-countries', [ShippingZoneController::class, 'assignCountries'])
+        ->name('dashboard.shipping-zones.assign-countries');
+
+    Route::resource('shipping-rate-cards', ShippingRateCardController::class)->names([
+        'index' => 'dashboard.shipping-rate-cards.index',
+        'store' => 'dashboard.shipping-rate-cards.store',
+        'update' => 'dashboard.shipping-rate-cards.update',
+        'destroy' => 'dashboard.shipping-rate-cards.destroy',
+    ]);
+
+    Route::get('shipping-rate-cards/{shippingRateCard}/rates', [ShippingRateController::class, 'index'])
+        ->name('dashboard.shipping-rates.index');
+    Route::post('shipping-rate-cards/{shippingRateCard}/rates', [ShippingRateController::class, 'store'])
+        ->name('dashboard.shipping-rates.store');
+    Route::put('shipping-rate-cards/{shippingRateCard}/rates/{shippingRate}', [ShippingRateController::class, 'update'])
+        ->name('dashboard.shipping-rates.update');
+    Route::delete('shipping-rate-cards/{shippingRateCard}/rates/{shippingRate}', [ShippingRateController::class, 'destroy'])
+        ->name('dashboard.shipping-rates.destroy');
 
 });
 

@@ -79,7 +79,7 @@ class WebEnController extends Controller
             'location_description' => 'nullable|string',
             'location_image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
-        
+
         $validated['about_features'] = json_decode($validated['about_features'], true);
         // معالجة الصور وحفظها
         $data = $request->all();

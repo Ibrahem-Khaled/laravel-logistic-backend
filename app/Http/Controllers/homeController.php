@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Country;
 use App\Models\Shipment;
 use App\Models\User;
 use App\Models\WebAr;
@@ -25,6 +26,7 @@ class homeController extends Controller
         $web = session()->get('locale') == 'ar'
             ? (WebAr::first() ?? new WebAr())
             : (WebEn::first() ?? new WebEn());
-        return view('home', compact('clients', 'web'));
+        $jordan = Country::where('name_en', 'Jordan')->first();
+        return view('home', compact('clients', 'web', 'jordan'));
     }
 }

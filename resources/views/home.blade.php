@@ -37,6 +37,7 @@
     @include('components.header')
     <main class="main">
         @include('components.hero')
+        @include('components.shipping-quote')
         <!-- About Section -->
         <section id="about" class="about section">
             <div class="container">
