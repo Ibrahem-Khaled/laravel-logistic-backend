@@ -430,11 +430,13 @@
         'per_kg' => __('messages.per_kg'),
         'error_calculating' => __('messages.error_calculating'),
         'error_connection' => __('messages.error_connection'),
+        'login_required_for_quote' => __('messages.login_required_for_quote'),
     ];
 @endphp
 <script>
 window.shippingQuoteTranslations = @json($shippingQuoteTranslations);
 window.shippingQuoteLocale = @json(app()->getLocale());
+window.shippingQuoteLoginUrl = @json(route('login'));
 </script>
 <script>
 document.addEventListener('DOMContentLoaded', function() {
@@ -504,15 +506,24 @@ document.addEventListener('DOMContentLoaded', function() {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
+                'Accept': 'application/json',
                 'X-CSRF-TOKEN': '{{ csrf_token() }}'
             },
             body: JSON.stringify(data)
         })
-        .then(response => response.json())
+        .then(response => {
+            if (response.status === 401) {
+                window.location.href = (window.shippingQuoteLoginUrl || '{{ route("login") }}') + '?intended=' + encodeURIComponent(window.location.href);
+                return null;
+            }
+            return response.json();
+        })
         .then(data => {
             loadingDiv.style.display = 'none';
             calculateBtn.disabled = false;
             calculateBtn.innerHTML = '<i class="bi bi-calculator me-2"></i>' + t.calculate_price;
+
+            if (!data) return;
 
             if (data.success) {
                 quotePrice.textContent = data.price.toFixed(2);

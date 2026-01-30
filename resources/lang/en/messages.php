@@ -70,4 +70,5 @@ return [
     'per_kg' => 'Per kilogram',
     'error_calculating' => 'An error occurred while calculating the price.',
     'error_connection' => 'Connection error. Please try again.',
+    'login_required_for_quote' => 'Please log in to calculate the shipping price.',
 ];

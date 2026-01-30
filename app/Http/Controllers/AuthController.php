@@ -33,10 +33,13 @@ class AuthController extends Controller
         return redirect()->back()->with('success', 'تم تحديث الملف الشخصي بنجاح.');
     }
 
-    public function login()
+    public function login(Request $request)
     {
         if (Auth::check()) {
-            return redirect()->route('profile')->with('success', 'تم تسجيل الدخول بنجاح.');
+            return redirect()->intended(route('home'))->with('success', 'تم تسجيل الدخول بنجاح.');
+        }
+        if ($request->filled('intended')) {
+            session()->put('url.intended', $request->intended);
         }
         return view('Auth.login');
     }
@@ -53,7 +56,7 @@ class AuthController extends Controller
 
         if (auth()->attempt($credentials, $remember)) {
             if (auth()->user()->role == 'admin') {
-                return redirect()->route('home')->with('success', 'تم تسجيل الدخول بنجاح.');
+                return redirect()->intended(route('home'))->with('success', 'تم تسجيل الدخول بنجاح.');
             } else {
                 $this->logout();
                 return redirect()->back()->with('error', 'تفاصيل تسجيل الدخول غير صحيحة. يرجى المحاولة مرة أخرى.');

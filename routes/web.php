@@ -42,8 +42,8 @@ Route::post('resetPassword', [AuthController::class, 'resetPassword'])->name('re
 
 Route::get('/', [homeController::class, 'home'])->name('home');
 
-// Shipping Quote Routes
-Route::post('/shipping/quote', [ShippingQuoteController::class, 'calculate'])->name('shipping.quote');
+// Shipping Quote Routes (calculate requires login)
+Route::post('/shipping/quote', [ShippingQuoteController::class, 'calculate'])->name('shipping.quote')->middleware('auth');
 Route::get('/shipping/countries', [ShippingQuoteController::class, 'countries'])->name('shipping.countries');
 
 Route::group(['middleware' => ['auth', 'isAdmin'], 'prefix' => 'dashboard'], function () {
