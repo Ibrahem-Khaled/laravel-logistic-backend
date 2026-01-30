@@ -2,9 +2,9 @@
 <section id="shipping-quote" class="shipping-quote section">
     <!-- Section Title -->
     <div class="container section-title" data-aos="fade-up">
-        <span>احسب سعر الشحن<br></span>
-        <h2>احسب سعر الشحن</h2>
-        <p>احصل على عرض سعر فوري ودقيق لشحنتك بناءً على الوجهة والوزن</p>
+        <span>{{ __('messages.shipping_quote_title') }}<br></span>
+        <h2>{{ __('messages.shipping_quote_title') }}</h2>
+        <p>{{ __('messages.shipping_quote_subtitle') }}</p>
     </div><!-- End Section Title -->
 
     <div class="container">
@@ -17,49 +17,49 @@
                                 <!-- From Country -->
                                 <div class="col-md-6">
                                     <label for="origin_country_id" class="form-label">
-                                        <i class="bi bi-geo-alt-fill me-2"></i>من
+                                        <i class="bi bi-geo-alt-fill me-2"></i>{{ __('messages.from') }}
                                     </label>
                                     <select class="form-select" id="origin_country_id" name="origin_country_id" required>
-                                        <option value="{{ $jordan->id ?? '' }}" selected>{{ $jordan->name_ar ?? 'الأردن' }}</option>
+                                        <option value="{{ $jordan->id ?? '' }}" selected>{{ app()->getLocale() == 'ar' ? ($jordan->name_ar ?? 'الأردن') : ($jordan->name_en ?? 'Jordan') }}</option>
                                     </select>
                                 </div>
 
                                 <!-- To Country -->
                                 <div class="col-md-6">
                                     <label for="destination_country_id" class="form-label">
-                                        <i class="bi bi-geo-alt me-2"></i>إلى
+                                        <i class="bi bi-geo-alt me-2"></i>{{ __('messages.to') }}
                                     </label>
                                     <select class="form-select" id="destination_country_id" name="destination_country_id" required>
-                                        <option value="" disabled selected>اختر الدولة</option>
+                                        <option value="" disabled selected>{{ __('messages.select_country') }}</option>
                                     </select>
                                 </div>
 
                                 <!-- Shipment Type -->
                                 <div class="col-md-6">
                                     <label for="shipment_type" class="form-label">
-                                        <i class="bi bi-box-seam me-2"></i>نوع الشحنة
+                                        <i class="bi bi-box-seam me-2"></i>{{ __('messages.shipment_type') }}
                                     </label>
                                     <select class="form-select" id="shipment_type" name="shipment_type" required>
-                                        <option value="parcel" selected>طرد</option>
-                                        <option value="documents">وثائق</option>
+                                        <option value="parcel" selected>{{ __('messages.parcel') }}</option>
+                                        <option value="documents">{{ __('messages.documents') }}</option>
                                     </select>
                                 </div>
 
                                 <!-- Weight Unit -->
                                 <div class="col-md-6">
                                     <label for="weight_unit" class="form-label">
-                                        <i class="bi bi-rulers me-2"></i>وحدة الوزن
+                                        <i class="bi bi-rulers me-2"></i>{{ __('messages.weight_unit') }}
                                     </label>
                                     <select class="form-select" id="weight_unit" name="weight_unit" required>
-                                        <option value="kg" selected>كيلوغرام (Kg)</option>
-                                        <option value="lb">رطل (LB)</option>
+                                        <option value="kg" selected>{{ __('messages.weight_kg') }}</option>
+                                        <option value="lb">{{ __('messages.weight_lb') }}</option>
                                     </select>
                                 </div>
 
                                 <!-- Weight per Unit -->
                                 <div class="col-md-6">
                                     <label for="weight_per_unit" class="form-label">
-                                        <i class="bi bi-speedometer2 me-2"></i>الوزن لكل وحدة
+                                        <i class="bi bi-speedometer2 me-2"></i>{{ __('messages.weight_per_unit') }}
                                     </label>
                                     <div class="input-group shipping-input-group">
                                         <input type="number" class="form-control" id="weight_per_unit" name="weight_per_unit"
@@ -71,7 +71,7 @@
                                 <!-- Units Count -->
                                 <div class="col-md-6">
                                     <label for="units_count" class="form-label">
-                                        <i class="bi bi-123 me-2"></i>عدد الوحدات
+                                        <i class="bi bi-123 me-2"></i>{{ __('messages.units_count') }}
                                     </label>
                                     <input type="number" class="form-control" id="units_count"
                                         name="units_count" min="1" value="1" required>
@@ -81,7 +81,7 @@
                                 <div class="col-12 mt-3">
                                     <button type="submit" class="btn btn-calculate w-100 py-3" id="calculate-btn">
                                         <i class="bi bi-calculator me-2"></i>
-                                        احسب السعر
+                                        {{ __('messages.calculate_price') }}
                                     </button>
                                 </div>
                             </div>
@@ -90,9 +90,9 @@
                         <!-- Loading Spinner -->
                         <div id="quote-loading" class="text-center mt-4" style="display: none;">
                             <div class="spinner-border text-danger" role="status" style="width: 3rem; height: 3rem;">
-                                <span class="visually-hidden">جاري الحساب...</span>
+                                <span class="visually-hidden">{{ __('messages.calculating') }}</span>
                             </div>
-                            <p class="mt-3 text-muted">جاري حساب سعر الشحن...</p>
+                            <p class="mt-3 text-muted">{{ __('messages.calculating_shipping') }}</p>
                         </div>
 
                         <!-- Result Display -->
@@ -103,7 +103,7 @@
                                         <div class="col-md-8">
                                             <h4 class="text-success mb-3">
                                                 <i class="bi bi-check-circle-fill me-2"></i>
-                                                سعر الشحن
+                                                {{ __('messages.shipping_price') }}
                                             </h4>
                                             <div id="quote-breakdown" class="breakdown-list"></div>
                                         </div>
@@ -415,7 +415,28 @@
 </style>
 
 <script>
+window.shippingQuoteTranslations = @json([
+    'calculating' => __('messages.calculating'),
+    'calculate_price' => __('messages.calculate_price'),
+    'from_label' => __('messages.from_label'),
+    'to_label' => __('messages.to_label'),
+    'zone' => __('messages.zone'),
+    'shipment_type_label' => __('messages.shipment_type_label'),
+    'parcel' => __('messages.parcel'),
+    'documents' => __('messages.documents'),
+    'total_weight' => __('messages.total_weight'),
+    'pricing_type' => __('messages.pricing_type'),
+    'flat_rate' => __('messages.flat_rate'),
+    'per_kg' => __('messages.per_kg'),
+    'error_calculating' => __('messages.error_calculating'),
+    'error_connection' => __('messages.error_connection'),
+]);
+window.shippingQuoteLocale = @json(app()->getLocale());
+</script>
+<script>
 document.addEventListener('DOMContentLoaded', function() {
+    const t = window.shippingQuoteTranslations;
+    const locale = window.shippingQuoteLocale || 'ar';
     const form = document.getElementById('shipping-quote-form');
     const originSelect = document.getElementById('origin_country_id');
     const destinationSelect = document.getElementById('destination_country_id');
@@ -429,6 +450,10 @@ document.addEventListener('DOMContentLoaded', function() {
     const quoteCurrency = document.getElementById('quote-currency');
     const quoteBreakdown = document.getElementById('quote-breakdown');
 
+    function countryName(c) {
+        return locale === 'ar' ? (c.name_ar || c.name_en) : (c.name_en || c.name_ar);
+    }
+
     // Load countries on page load
     fetch('{{ route("shipping.countries") }}')
         .then(response => response.json())
@@ -437,7 +462,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 data.countries.forEach(country => {
                     const option = document.createElement('option');
                     option.value = country.id;
-                    option.textContent = country.name_ar || country.name_en;
+                    option.textContent = countryName(country);
                     destinationSelect.appendChild(option);
                 });
             }
@@ -460,7 +485,7 @@ document.addEventListener('DOMContentLoaded', function() {
         errorDiv.style.display = 'none';
         loadingDiv.style.display = 'block';
         calculateBtn.disabled = true;
-        calculateBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>جاري الحساب...';
+        calculateBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>' + t.calculating;
 
         const formData = new FormData(form);
         const data = {
@@ -484,40 +509,41 @@ document.addEventListener('DOMContentLoaded', function() {
         .then(data => {
             loadingDiv.style.display = 'none';
             calculateBtn.disabled = false;
-            calculateBtn.innerHTML = '<i class="bi bi-calculator me-2"></i>احسب السعر';
+            calculateBtn.innerHTML = '<i class="bi bi-calculator me-2"></i>' + t.calculate_price;
 
             if (data.success) {
                 quotePrice.textContent = data.price.toFixed(2);
                 quoteCurrency.textContent = data.currency || 'JOD';
 
-                // Build breakdown with better styling
                 const breakdown = data.breakdown || {};
+                const shipmentTypeLabel = breakdown.shipment_type === 'parcel' ? t.parcel : t.documents;
+                const pricingTypeLabel = breakdown.pricing_type === 'flat' ? t.flat_rate : t.per_kg;
+
                 let breakdownHTML = '<ul>';
-                breakdownHTML += `<li><i class="bi bi-arrow-right-circle"></i><strong>من:</strong> ${breakdown.origin_country || ''}</li>`;
-                breakdownHTML += `<li><i class="bi bi-arrow-left-circle"></i><strong>إلى:</strong> ${breakdown.destination_country || ''}</li>`;
-                breakdownHTML += `<li><i class="bi bi-map"></i><strong>المنطقة:</strong> ${breakdown.zone || ''}</li>`;
-                breakdownHTML += `<li><i class="bi bi-box"></i><strong>نوع الشحنة:</strong> ${breakdown.shipment_type === 'parcel' ? 'طرد' : 'وثائق'}</li>`;
-                breakdownHTML += `<li><i class="bi bi-speedometer"></i><strong>الوزن الإجمالي:</strong> ${breakdown.total_weight || ''}</li>`;
-                breakdownHTML += `<li><i class="bi bi-cash-stack"></i><strong>نوع التسعير:</strong> ${breakdown.pricing_type === 'flat' ? 'سعر ثابت' : 'لكل كيلوغرام'} - ${breakdown.rate_applied || ''}</li>`;
+                breakdownHTML += '<li><i class="bi bi-arrow-right-circle"></i><strong>' + t.from_label + '</strong> ' + (breakdown.origin_country || '') + '</li>';
+                breakdownHTML += '<li><i class="bi bi-arrow-left-circle"></i><strong>' + t.to_label + '</strong> ' + (breakdown.destination_country || '') + '</li>';
+                breakdownHTML += '<li><i class="bi bi-map"></i><strong>' + t.zone + ':</strong> ' + (breakdown.zone || '') + '</li>';
+                breakdownHTML += '<li><i class="bi bi-box"></i><strong>' + t.shipment_type_label + '</strong> ' + shipmentTypeLabel + '</li>';
+                breakdownHTML += '<li><i class="bi bi-speedometer"></i><strong>' + t.total_weight + ':</strong> ' + (breakdown.total_weight || '') + '</li>';
+                breakdownHTML += '<li><i class="bi bi-cash-stack"></i><strong>' + t.pricing_type + ':</strong> ' + pricingTypeLabel + ' - ' + (breakdown.rate_applied || '') + '</li>';
                 breakdownHTML += '</ul>';
 
                 quoteBreakdown.innerHTML = breakdownHTML;
                 resultDiv.style.display = 'block';
 
-                // Scroll to result with smooth animation
                 setTimeout(() => {
                     resultDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
                 }, 100);
             } else {
-                document.getElementById('quote-error-message').textContent = data.message || 'حدث خطأ أثناء حساب السعر';
+                document.getElementById('quote-error-message').textContent = data.message || t.error_calculating;
                 errorDiv.style.display = 'block';
             }
         })
         .catch(error => {
             loadingDiv.style.display = 'none';
             calculateBtn.disabled = false;
-            calculateBtn.innerHTML = '<i class="bi bi-calculator me-2"></i>احسب السعر';
-            document.getElementById('quote-error-message').textContent = 'حدث خطأ في الاتصال. يرجى المحاولة مرة أخرى.';
+            calculateBtn.innerHTML = '<i class="bi bi-calculator me-2"></i>' + t.calculate_price;
+            document.getElementById('quote-error-message').textContent = t.error_connection;
             errorDiv.style.display = 'block';
             console.error('Error:', error);
         });
