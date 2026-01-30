@@ -414,23 +414,26 @@
 }
 </style>
 
+@php
+    $shippingQuoteTranslations = [
+        'calculating' => __('messages.calculating'),
+        'calculate_price' => __('messages.calculate_price'),
+        'from_label' => __('messages.from_label'),
+        'to_label' => __('messages.to_label'),
+        'zone' => __('messages.zone'),
+        'shipment_type_label' => __('messages.shipment_type_label'),
+        'parcel' => __('messages.parcel'),
+        'documents' => __('messages.documents'),
+        'total_weight' => __('messages.total_weight'),
+        'pricing_type' => __('messages.pricing_type'),
+        'flat_rate' => __('messages.flat_rate'),
+        'per_kg' => __('messages.per_kg'),
+        'error_calculating' => __('messages.error_calculating'),
+        'error_connection' => __('messages.error_connection'),
+    ];
+@endphp
 <script>
-window.shippingQuoteTranslations = @json([
-    'calculating' => __('messages.calculating'),
-    'calculate_price' => __('messages.calculate_price'),
-    'from_label' => __('messages.from_label'),
-    'to_label' => __('messages.to_label'),
-    'zone' => __('messages.zone'),
-    'shipment_type_label' => __('messages.shipment_type_label'),
-    'parcel' => __('messages.parcel'),
-    'documents' => __('messages.documents'),
-    'total_weight' => __('messages.total_weight'),
-    'pricing_type' => __('messages.pricing_type'),
-    'flat_rate' => __('messages.flat_rate'),
-    'per_kg' => __('messages.per_kg'),
-    'error_calculating' => __('messages.error_calculating'),
-    'error_connection' => __('messages.error_connection'),
-]);
+window.shippingQuoteTranslations = @json($shippingQuoteTranslations);
 window.shippingQuoteLocale = @json(app()->getLocale());
 </script>
 <script>
