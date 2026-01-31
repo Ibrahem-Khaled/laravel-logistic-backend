@@ -43,6 +43,7 @@ Route::post('resetPassword', [AuthController::class, 'resetPassword'])->name('re
 Route::get('/', [homeController::class, 'home'])->name('home');
 
 // Shipping Quote Routes (calculate requires login)
+Route::get('/shipping-rates', [ShippingQuoteController::class, 'showPage'])->name('shipping.rates.page');
 Route::post('/shipping/quote', [ShippingQuoteController::class, 'calculate'])->name('shipping.quote')->middleware('auth');
 Route::get('/shipping/countries', [ShippingQuoteController::class, 'countries'])->name('shipping.countries');
 

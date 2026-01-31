@@ -1,16 +1,17 @@
 <header id="header" class="header d-flex align-items-center fixed-top" style="direction: ltr;">
     <div class="container-fluid container-xl position-relative d-flex align-items-center">
         <!-- الشعار -->
-        <a href="index.html" class="logo d-flex align-items-center me-auto">
+        <a href="{{ route('home') }}" class="logo d-flex align-items-center me-auto">
             <img src="{{ asset('assets/img/logo-white.png') }}" alt="logo" class="img-fluid" height="200">
         </a>
 
         <!-- القائمة الرئيسية -->
         <nav id="navmenu" class="navmenu">
             <ul>
-                <li><a href="#home" class="nav-link">{{ __('messages.home') }}</a></li>
+                <li><a href="{{ route('home') }}" class="nav-link">{{ __('messages.home') }}</a></li>
                 <li><a href="#about" class="nav-link">{{ __('messages.about') }}</a></li>
                 <li><a href="#services" class="nav-link">{{ __('messages.services') }}</a></li>
+                <li><a href="{{ route('shipping.rates.page') }}" class="nav-link">{{ __('messages.shipping_rates') }}</a></li>
                 <li><a href="#contact" class="nav-link">{{ __('messages.contact') }}</a></li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" id="language" data-bs-toggle="dropdown"

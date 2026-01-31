@@ -7,6 +7,7 @@ use App\Services\ShippingPriceCalculator;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\View\View;
 
 class ShippingQuoteController extends Controller
 {
@@ -15,6 +16,15 @@ class ShippingQuoteController extends Controller
     public function __construct(ShippingPriceCalculator $calculator)
     {
         $this->calculator = $calculator;
+    }
+
+    /**
+     * Show the shipping rates calculator page
+     */
+    public function showPage(): View
+    {
+        $jordan = Country::where('name_en', 'Jordan')->first();
+        return view('shipping-rates', compact('jordan'));
     }
 
     /**

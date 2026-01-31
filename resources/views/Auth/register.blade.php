@@ -1,136 +1,111 @@
-<!DOCTYPE html>
-<html lang="ar">
+@extends('layouts.web.web')
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>إنشاء حساب</title>
+@section('title', __('messages.register'))
 
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.3.2/mdb.min.css" rel="stylesheet" />
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200..1000&display=swap" rel="stylesheet">
-
-    <style>
-        body {
-            color: #fff;
-            background-color: #53045F;
-            background-size: cover;
-            height: 100%;
-            direction: rtl;
-            font-family: "Cairo", sans-serif;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0;
-            padding: 0;
-        }
-
-        .container {
-            max-width: 900px;
-            background-color: #fff;
-            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
-            border-radius: 15px;
-            display: flex;
-            overflow: hidden;
-            margin-top: 3%;
-        }
-
-        .image-container {
-            background-image: url('https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse3.mm.bing.net%2Fth%3Fid%3DOIP.zyvdkrnveztTW6Dt-VeNfQHaD4%26pid%3DApi&f=1&ipt=e2cc5542d280de32ed56b8eb717f4d4f0cf2631ade2ed857c815dcfdf4d2fa8e&ipo=images');
-            background-size: cover;
-            background-position: center;
-            width: 50%;
-            height: auto;
-        }
-
-        .form-container {
-            padding: 50px;
-            width: 50%;
-            background-color: #f8f9fa;
-            color: #000;
-        }
-
-        .logo-container {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-
-        .logo-container img {
-            max-width: 120px;
-        }
-
-        .btn-primary {
-            background-color: #ff5722;
-            border: none;
-        }
-
-        .btn-primary:hover {
-            background-color: #e64a19;
-        }
-
-        a {
-            color: #ff5722;
-        }
-
-        a:hover {
-            color: #e64a19;
-            text-decoration: none;
-        }
-    </style>
-</head>
-
-<body>
+@section('content')
+<section id="auth-register" class="auth-section section">
+    <div class="container section-title" data-aos="fade-up">
+        <span>{{ __('messages.register') }}<br></span>
+        <h2>{{ __('messages.register') }}</h2>
+    </div>
     <div class="container">
-        <div class="image-container"></div>
-        <div class="form-container">
-            <div class="logo-container">
-                <img src="{{ asset('assets/img/logo-ct-dark.png') }}" alt="Logo">
+        <div class="row justify-content-center" data-aos="fade-up" data-aos-delay="100">
+            <div class="col-lg-8 col-md-10">
+                <div class="card shadow-sm border-0">
+                    <div class="card-body p-4 p-md-5">
+                        @if (session('success'))
+                            <div class="alert alert-success border-0">{{ session('success') }}</div>
+                        @endif
+                        @if (session('error'))
+                            <div class="alert alert-danger border-0">{{ session('error') }}</div>
+                        @endif
+                        <form method="POST" action="{{ route('customRegister') }}">
+                            @csrf
+                            <div class="row gy-4">
+                                <div class="col-md-6">
+                                    <label for="name" class="form-label">
+                                        <i class="bi bi-person me-2"></i>{{ __('messages.full_name') }}
+                                    </label>
+                                    <input type="text" name="name" id="name" class="form-control @error('name') is-invalid @enderror"
+                                        value="{{ old('name') }}" placeholder="{{ __('messages.enter_full_name') }}" required>
+                                    @error('name')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="email" class="form-label">
+                                        <i class="bi bi-envelope me-2"></i>{{ __('messages.email') }}
+                                    </label>
+                                    <input type="email" name="email" id="email" class="form-control @error('email') is-invalid @enderror"
+                                        value="{{ old('email') }}" placeholder="{{ __('messages.enter_email') }}" required>
+                                    @error('email')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="phone" class="form-label">
+                                        <i class="bi bi-telephone me-2"></i>{{ __('messages.phone_number') }}
+                                    </label>
+                                    <input type="text" name="phone" id="phone" class="form-control @error('phone') is-invalid @enderror"
+                                        value="{{ old('phone') }}" placeholder="{{ __('messages.enter_phone') }}">
+                                    @error('phone')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="address" class="form-label">
+                                        <i class="bi bi-geo-alt me-2"></i>{{ __('messages.address') }}
+                                    </label>
+                                    <input type="text" name="address" id="address" class="form-control @error('address') is-invalid @enderror"
+                                        value="{{ old('address') }}" placeholder="{{ __('messages.enter_address') }}">
+                                    @error('address')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="password" class="form-label">
+                                        <i class="bi bi-lock me-2"></i>{{ __('messages.password') }}
+                                    </label>
+                                    <input type="password" name="password" id="password" class="form-control @error('password') is-invalid @enderror"
+                                        placeholder="{{ __('messages.enter_password') }}" required>
+                                    @error('password')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="password_confirmation" class="form-label">
+                                        <i class="bi bi-lock-fill me-2"></i>{{ __('messages.confirm_password') }}
+                                    </label>
+                                    <input type="password" name="password_confirmation" id="password_confirmation" class="form-control"
+                                        placeholder="{{ __('messages.reenter_password') }}" required>
+                                </div>
+                                <div class="col-12 mt-2">
+                                    <button type="submit" class="btn btn-auth-primary w-100 py-3 mb-3">
+                                        <i class="bi bi-person-plus me-2"></i>{{ __('messages.submit_register') }}
+                                    </button>
+                                    <p class="text-center mb-0 small">
+                                        {{ __('messages.have_account') }} <a href="{{ route('login') }}" class="fw-semibold">{{ __('messages.login_here') }}</a>
+                                    </p>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </div>
-            <h3 class="mb-4 text-center">إنشاء حساب</h3>
-            <form method="POST" action="{{ route('customRegister') }}">
-                @csrf
-
-                <div class="form-group mb-4">
-                    <label>الاسم الكامل</label>
-                    <input type="text" name="name" class="form-control" placeholder="أدخل اسمك الكامل" required>
-                </div>
-                <div class="form-group mb-4">
-                    <label>البريد الإلكتروني</label>
-                    <input type="email" name="email" class="form-control" placeholder="أدخل بريدك الإلكتروني"
-                        required>
-                </div>
-                <div class="form-group mb-4">
-                    <label>رقم الهاتف</label>
-                    <input type="phone" name="phone" id="phone" class="form-control"
-                        placeholder="أدخل رقم هاتفك" required>
-                </div>
-                <div class="form-group mb-4">
-                    <label>عنوان</label>
-                    <input type="text" name="address" id="address" class="form-control" placeholder="أدخل عنوانك"
-                        required>
-                </div>
-                <div class="form-group mb-4">
-                    <label>كلمة المرور</label>
-                    <input type="password" name="password" class="form-control" placeholder="أدخل كلمة المرور" required>
-                </div>
-                <div class="form-group mb-4">
-                    <label>تأكيد كلمة المرور</label>
-                    <input type="password" name="password_confirmation" class="form-control"
-                        placeholder="أعد إدخال كلمة المرور" required>
-                </div>
-                <button type="submit" class="btn btn-primary w-100 mb-3">تسجيل</button>
-                <small class="d-block text-center">لديك حساب بالفعل؟ <a href="{{ route('login') }}">تسجيل
-                        الدخول</a></small>
-            </form>
         </div>
     </div>
-
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.3.2/mdb.umd.min.js"></script>
-</body>
-
-</html>
+</section>
+<style>
+.auth-section { padding: 60px 0; background-color: var(--background-color, #f8f9fa); }
+.auth-section .card { border-radius: 10px; transition: all 0.3s ease; }
+.auth-section .form-label { color: var(--heading-color, #212529); font-weight: 500; }
+.auth-section .form-label i { color: var(--accent-color, #bc1523); }
+.auth-section .form-control { border-radius: 6px; padding: 12px 15px; height: 48px; }
+.auth-section .form-control:focus { border-color: var(--accent-color, #bc1523); box-shadow: 0 0 0 0.2rem rgba(188, 21, 35, 0.15); }
+.btn-auth-primary { background-color: var(--accent-color, #bc1523); border-color: var(--accent-color, #bc1523); color: #fff; font-weight: 600; border-radius: 8px; }
+.btn-auth-primary:hover { background-color: #9a111c; border-color: #9a111c; color: #fff; }
+.auth-section a:not(.btn) { color: var(--accent-color, #bc1523); }
+.auth-section a:not(.btn):hover { color: #9a111c; }
+@media (max-width: 768px) { .auth-section { padding: 40px 0; } }
+</style>
+@endsection

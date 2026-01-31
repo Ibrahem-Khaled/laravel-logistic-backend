@@ -1,161 +1,106 @@
-<!DOCTYPE html>
-<html lang="ar">
+@extends('layouts.web.web')
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>الملف الشخصي</title>
+@section('title', __('messages.profile'))
 
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.3.2/mdb.min.css" rel="stylesheet" />
-
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200..1000&display=swap" rel="stylesheet">
-
-    <style>
-        body {
-            background-color: #ffeb3b;
-            background-image: linear-gradient(135deg, #ff5722 30%, #ffeb3b 100%);
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-family: "Cairo", sans-serif;
-            margin: 0;
-            padding: 0;
-            color: #fff;
-            direction: rtl;
-        }
-
-        .container {
-            max-width: 600px;
-            width: 100%;
-            padding: 20px;
-        }
-
-        .card {
-            border-radius: 15px;
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
-            background-color: #fff;
-            color: #333;
-        }
-
-        .card-header {
-            background-color: #ff5722;
-            color: #fff;
-            padding: 15px;
-            border-radius: 15px 15px 0 0;
-        }
-
-        .card-header h3 {
-            margin: 0;
-        }
-
-        .btn-primary {
-            background-color: #ff5722;
-            border: none;
-            width: 100%;
-            padding: 10px;
-            border-radius: 25px;
-            transition: background-color 0.3s ease;
-        }
-
-        .btn-primary:hover {
-            background-color: #e64a19;
-        }
-
-        .btn-danger {
-            background-color: #e64a19;
-            border: none;
-            padding: 10px 20px;
-            transition: background-color 0.3s ease;
-        }
-
-        .btn-danger:hover {
-            background-color: #d32f2f;
-        }
-
-        .form-control {
-            border-radius: 10px;
-            padding: 10px 20px;
-            margin-bottom: 15px;
-            border: 1px solid #ffeb3b;
-            transition: border-color 0.3s ease;
-        }
-
-        .form-control:focus {
-            border-color: #ff5722;
-            box-shadow: none;
-        }
-
-        .alert-success {
-            background-color: #4caf50;
-            color: #fff;
-            border-radius: 25px;
-            padding: 10px 20px;
-            margin-bottom: 20px;
-        }
-    </style>
-</head>
-
-<body>
+@section('content')
+<section id="auth-profile" class="auth-section section">
+    <div class="container section-title" data-aos="fade-up">
+        <span>{{ __('messages.profile') }}<br></span>
+        <h2>{{ __('messages.profile') }}</h2>
+    </div>
     <div class="container">
-        <div class="card">
-            <div class="card-header d-flex justify-content-between align-items-center">
-                <h3 class="card-title">الملف الشخصي</h3>
-                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-inline">
-                    @csrf
-                    <button type="submit" class="btn btn-danger">تسجيل الخروج</button>
-                </form>
-            </div>
-            <div class="card-body">
-                @if (session('success'))
-                    <div class="alert alert-success">
-                        {{ session('success') }}
+        <div class="row justify-content-center" data-aos="fade-up" data-aos-delay="100">
+            <div class="col-lg-8 col-md-10">
+                <div class="card shadow-sm border-0">
+                    <div class="card-body p-4 p-md-5">
+                        @if (session('success'))
+                            <div class="alert alert-success border-0">{{ session('success') }}</div>
+                        @endif
+                        @if (session('error'))
+                            <div class="alert alert-danger border-0">{{ session('error') }}</div>
+                        @endif
+                        <form action="{{ route('profile.update') }}" method="POST">
+                            @csrf
+                            <div class="row gy-4">
+                                <div class="col-md-6">
+                                    <label for="name" class="form-label">
+                                        <i class="bi bi-person me-2"></i>{{ __('messages.full_name') }}
+                                    </label>
+                                    <input type="text" name="name" id="name" class="form-control @error('name') is-invalid @enderror"
+                                        value="{{ old('name', $user->name ?? '') }}" placeholder="{{ __('messages.enter_full_name') }}" required>
+                                    @error('name')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="email" class="form-label">
+                                        <i class="bi bi-envelope me-2"></i>{{ __('messages.email') }}
+                                    </label>
+                                    <input type="email" name="email" id="email" class="form-control @error('email') is-invalid @enderror"
+                                        value="{{ old('email', $user->email ?? '') }}" placeholder="{{ __('messages.enter_email') }}" required>
+                                    @error('email')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="phone" class="form-label">
+                                        <i class="bi bi-telephone me-2"></i>{{ __('messages.phone_number') }}
+                                    </label>
+                                    <input type="text" name="phone" id="phone" class="form-control @error('phone') is-invalid @enderror"
+                                        value="{{ old('phone', $user->phone ?? '') }}" placeholder="{{ __('messages.enter_phone') }}">
+                                    @error('phone')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="address" class="form-label">
+                                        <i class="bi bi-geo-alt me-2"></i>{{ __('messages.address') }}
+                                    </label>
+                                    <input type="text" name="address" id="address" class="form-control @error('address') is-invalid @enderror"
+                                        value="{{ old('address', $user->address ?? '') }}" placeholder="{{ __('messages.enter_address') }}">
+                                    @error('address')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="password" class="form-label">
+                                        <i class="bi bi-lock me-2"></i>{{ __('messages.new_password_optional') }}
+                                    </label>
+                                    <input type="password" name="password" id="password" class="form-control @error('password') is-invalid @enderror"
+                                        placeholder="{{ __('messages.enter_password') }}" autocomplete="new-password">
+                                    @error('password')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="password_confirmation" class="form-label">
+                                        <i class="bi bi-lock-fill me-2"></i>{{ __('messages.confirm_password') }}
+                                    </label>
+                                    <input type="password" name="password_confirmation" id="password_confirmation" class="form-control"
+                                        placeholder="{{ __('messages.reenter_password') }}" autocomplete="new-password">
+                                </div>
+                                <div class="col-12 mt-2">
+                                    <button type="submit" class="btn btn-auth-primary w-100 py-3">
+                                        <i class="bi bi-check2-circle me-2"></i>{{ __('messages.update_profile') }}
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
                     </div>
-                @endif
-                <form action="{{ route('profile.update') }}" method="POST">
-                    @csrf
-                    <div class="form-group">
-                        <label for="name">الاسم الكامل</label>
-                        <input type="text" class="form-control" id="name" name="name"
-                            value="{{ old('name', $user->name) }}" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="email">البريد الإلكتروني</label>
-                        <input type="email" class="form-control" id="email" name="email"
-                            value="{{ old('email', $user->email) }}" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="address">العنوان</label>
-                        <input type="text" class="form-control" id="address" name="address"
-                            value="{{ old('address', $user->address) }}" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="phone">رقم الهاتف</label>
-                        <input type="phone" class="form-control" id="phone" name="phone"
-                            value="{{ old('phone', $user->phone) }}" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="password">كلمة المرور الجديدة (اترك الحقل فارغًا إذا كنت لا ترغب في تغييرها)</label>
-                        <input type="password" class="form-control" id="password" name="password">
-                    </div>
-                    <div class="form-group">
-                        <label for="password_confirmation">تأكيد كلمة المرور</label>
-                        <input type="password" class="form-control" id="password_confirmation"
-                            name="password_confirmation">
-                    </div>
-                    <button type="submit" class="btn btn-primary">تحديث الملف الشخصي</button>
-                </form>
+                </div>
             </div>
         </div>
     </div>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.3.2/mdb.min.js"></script>
-</body>
-
-</html>
+</section>
+<style>
+.auth-section { padding: 60px 0; background-color: var(--background-color, #f8f9fa); }
+.auth-section .card { border-radius: 10px; transition: all 0.3s ease; }
+.auth-section .form-label { color: var(--heading-color, #212529); font-weight: 500; }
+.auth-section .form-label i { color: var(--accent-color, #bc1523); }
+.auth-section .form-control { border-radius: 6px; padding: 12px 15px; height: 48px; }
+.auth-section .form-control:focus { border-color: var(--accent-color, #bc1523); box-shadow: 0 0 0 0.2rem rgba(188, 21, 35, 0.15); }
+.btn-auth-primary { background-color: var(--accent-color, #bc1523); border-color: var(--accent-color, #bc1523); color: #fff; font-weight: 600; border-radius: 8px; }
+.btn-auth-primary:hover { background-color: #9a111c; border-color: #9a111c; color: #fff; }
+@media (max-width: 768px) { .auth-section { padding: 40px 0; } }
+</style>
+@endsection

@@ -1,3 +1,7 @@
+@extends('layouts.web.web')
+
+@section('title', __('messages.shipping_rates'))
+@section('content')
 <!-- Shipping Quote Calculator Section -->
 <section id="shipping-quote" class="shipping-quote section">
     <!-- Section Title -->
@@ -208,6 +212,8 @@
     display: flex;
     align-items: stretch;
     width: 100%;
+    flex-wrap: nowrap;
+    direction: ltr;
 }
 
 .shipping-quote .input-group .form-control,
@@ -215,6 +221,8 @@
     height: 48px;
     border-radius: 6px 0 0 6px;
     border-right: none;
+    flex: 1 1 auto;
+    min-width: 0;
 }
 
 .shipping-quote .input-group-text {
@@ -230,6 +238,7 @@
     align-items: center;
     justify-content: center;
     min-width: 60px;
+    flex-shrink: 0;
     transition: all 0.3s ease;
 }
 
@@ -564,3 +573,4 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 </script>
+@endsection
