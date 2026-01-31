@@ -17,6 +17,7 @@ use App\Http\Controllers\homeController;
 use App\Http\Controllers\WebArController;
 use App\Http\Controllers\WebEnController;
 use App\Http\Controllers\ShippingQuoteController;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -44,7 +45,7 @@ Route::get('/', [homeController::class, 'home'])->name('home');
 
 // Shipping Quote Routes (calculate requires login)
 Route::get('/shipping-rates', [ShippingQuoteController::class, 'showPage'])->name('shipping.rates.page');
-Route::post('/shipping/quote', [ShippingQuoteController::class, 'calculate'])->name('shipping.quote')->middleware('auth');
+Route::post('/shipping/quote', [ShippingQuoteController::class, 'calculate'])->name('shipping.quote');
 Route::get('/shipping/countries', [ShippingQuoteController::class, 'countries'])->name('shipping.countries');
 
 Route::group(['middleware' => ['auth', 'isAdmin'], 'prefix' => 'dashboard'], function () {
@@ -114,7 +115,7 @@ Route::group(['middleware' => ['auth', 'isAdmin'], 'prefix' => 'dashboard'], fun
 
 });
 
-Route::get('locale/{lang}', function ($lang) {
+Route::get('locale/{lang}', function (string $lang) {
     App::setLocale($lang);
     session()->put('locale', $lang);
 

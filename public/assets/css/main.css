@@ -267,8 +267,10 @@ h6 {
   line-height: 1;
 }
 
-.header .logo img {
+.header .logo img,
+.header .logo-img {
   max-height: 36px;
+  width: auto;
   margin-right: 8px;
 }
 
@@ -296,8 +298,78 @@ h6 {
   background: color-mix(in srgb, var(--accent-color), transparent 15%);
 }
 
+/* Header bar layout - logo و القائمة و تسجيل الدخول حسب اتجاه الصفحة (RTL/LTR) */
+.header-container {
+  display: flex;
+  align-items: center;
+  position: relative;
+  gap: 0.75rem;
+}
+
+.header-logo {
+  flex-shrink: 0;
+  margin-inline-end: auto;
+}
+
+.navmenu {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  margin-inline-start: auto;
+}
+
+.header-actions .btn-login {
+  color: var(--contrast-color);
+  background: var(--accent-color);
+  border: none;
+  font-size: 14px;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.header-actions .btn-login:hover {
+  color: var(--contrast-color);
+  background: color-mix(in srgb, var(--accent-color), transparent 15%);
+}
+
+.user-trigger {
+  color: var(--heading-color);
+  padding: 4px 8px;
+  border-radius: 8px;
+}
+
+.user-trigger .user-name {
+  max-width: 120px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.navmenu .dropdown-arrow {
+  font-size: 0.75em;
+  transition: transform 0.2s;
+}
+
+.navmenu .dropdown-arrow-spacing {
+  margin-inline-start: 0.5rem;
+}
+
+.navmenu .dropdown.active .dropdown-arrow {
+  transform: rotate(180deg);
+}
+
 @media (max-width: 1200px) {
-  .header .logo {
+  .header .logo,
+  .header .header-logo {
     order: 1;
   }
 
@@ -308,8 +380,89 @@ h6 {
   }
 
   .header .navmenu {
+    order: 2;
+    flex: 1;
+    justify-content: flex-end;
+  }
+
+  .header .header-actions {
     order: 3;
   }
+
+  .nav-item-mobile-actions {
+    padding: 16px 20px;
+    margin-top: 8px;
+    border-top: 1px solid color-mix(in srgb, var(--default-color), transparent 90%);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .nav-item-mobile-actions .nav-link {
+    padding: 10px 0;
+  }
+
+  .nav-item-mobile-actions .btn-login {
+    justify-content: center;
+    padding: 12px 16px;
+    background-color: var(--accent-color);
+    border-color: var(--accent-color);
+    color: #fff;
+  }
+  .nav-item-mobile-actions .btn-login:hover {
+    background-color: #9a111c;
+    border-color: #9a111c;
+    color: #fff;
+  }
+
+  .mobile-nav-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    border: none;
+    background: transparent;
+    color: var(--nav-color);
+    font-size: 1.5rem;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: color 0.2s, background 0.2s;
+  }
+
+  .mobile-nav-toggle:hover {
+    color: var(--nav-hover-color);
+    background: rgba(255, 255, 255, 0.1);
+  }
+
+  .mobile-nav-toggle i {
+    font-size: 1.5rem;
+  }
+
+  .navmenu .nav-list {
+    display: none;
+  }
+
+  .navmenu .lang-dropdown,
+  .navmenu .dropdown ul {
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: max-height 0.25s ease, opacity 0.2s;
+  }
+
+  .navmenu .dropdown>.dropdown-active.lang-dropdown,
+  .navmenu .dropdown>.dropdown-active {
+    max-height: 200px;
+    opacity: 1;
+    overflow-y: auto;
+  }
+
+  .mobile-nav-active .navmenu .nav-list {
+    display: block;
+  }
+
 }
 
 .scrolled .header {

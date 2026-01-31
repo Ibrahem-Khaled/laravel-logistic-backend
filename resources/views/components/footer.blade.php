@@ -20,18 +20,21 @@
             </div>
 
             <div class="col-lg-3 col-md-12 footer-contact text-center text-md-start">
-                <h4>{{ __('messages.contact_title') }}</h4>
-                <p>{{ __('messages.address_line1') }}<br>
-                    {{ __('messages.address_line2') }}<br>
-                    {{ __('messages.address_line3') }}</p>
-                <p>{{ __('messages.country') }}</p>
-                <a class="mt-4 text-white" href="tel:+00962799102049">
-                    <strong>{{ __('messages.phone') }}:</strong> <span>+962799102049</span>
-                </a>
-                <br>
-                <a href="mailto:info@kafafiexpress.com" class="text-white">
-                    <strong>{{ __('messages.email') }}:</strong> <span>info@kafafiexpress.com</span>
-                </a>
+                <h4>{{ __('messages.footer_contact_title') }}</h4>
+                <p class="mb-2">
+                    <strong>{{ __('messages.footer_main_branch') }}</strong><br>
+                    {{ __('messages.footer_main_branch_address') }}<br>
+                    {{ __('messages.phone') }}: <a href="tel:00962799102049" class="text-white text-decoration-none">00962799102049</a>
+                </p>
+                <p class="mb-2">
+                    <strong>{{ __('messages.footer_shafa_badran_branch') }}</strong><br>
+                    {{ __('messages.footer_shafa_badran_address') }}<br>
+                    <a href="tel:00962791075777" class="text-white text-decoration-none">00962791075777</a>
+                </p>
+                <p class="mb-0">
+                    <strong>{{ __('messages.email') }}:</strong>
+                    <a href="mailto:info@kafafiexpress.com" class="text-white text-decoration-none">info@kafafiexpress.com</a>
+                </p>
             </div>
 
             <div class="col-lg-3 col-md-12 footer-contact text-center text-md-end">

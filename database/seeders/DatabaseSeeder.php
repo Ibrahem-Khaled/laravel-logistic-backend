@@ -18,6 +18,7 @@ class DatabaseSeeder extends Seeder
             ShippingZoneCountriesSeeder::class,
             ShippingRateCardsSeeder::class,
             ShippingRatesSeeder::class,
+            WebContentSeeder::class,
         ]);
     }
 }

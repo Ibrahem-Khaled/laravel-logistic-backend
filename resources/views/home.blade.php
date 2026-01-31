@@ -57,7 +57,7 @@
                             <ul>
                                 @foreach ((json_decode($web?->about_features, true) ?? []) as $feature)
                                     <li>
-                                        <i class="bi bi-broadcast"></i>
+                                        <i class="bi bi-broadcast" style="margin: 0 10px;"></i>
                                         <div>
                                             <h5>{{ $feature['title'] ?? 'بدون عنوان' }}</h5>
                                             <p>{{ $feature['description'] ?? 'بدون وصف' }}</p>
