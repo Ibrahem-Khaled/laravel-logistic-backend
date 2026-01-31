@@ -1,7 +1,7 @@
-<footer id="footer" class="footer dark-background">
+<footer id="footer" class="footer dark-background" dir="{{ app()->getLocale() == 'ar' ? 'rtl' : 'ltr' }}">
     <div class="container footer-top">
         <div class="row gy-4">
-            <div class="col-lg-5 col-md-12 footer-about">
+            <div class="col-lg-5 col-md-12 footer-about {{ app()->getLocale() == 'ar' ? 'text-center text-md-end' : 'text-center text-md-start' }}">
                 <a href="index.html" class="logo d-flex align-items-center">
                     <span class="sitename">{{ $web?->site_title ?? '' }}</span>
                 </a>
@@ -19,7 +19,7 @@
                 </div>
             </div>
 
-            <div class="col-lg-3 col-md-12 footer-contact text-center text-md-start">
+            <div class="col-lg-3 col-md-12 footer-contact {{ app()->getLocale() == 'ar' ? 'text-center text-md-end' : 'text-center text-md-start' }}">
                 <h4>{{ __('messages.footer_contact_title') }}</h4>
                 <p class="mb-2">
                     <strong>{{ __('messages.footer_main_branch') }}</strong><br>
@@ -37,7 +37,7 @@
                 </p>
             </div>
 
-            <div class="col-lg-3 col-md-12 footer-contact text-center text-md-end">
+            <div class="col-lg-3 col-md-12 footer-contact {{ app()->getLocale() == 'ar' ? 'text-center text-md-start' : 'text-center text-md-end' }}">
                 <img src="{{ asset('assets/img/logo-white.png') }}" alt="" class="img-fluid" data-aos="fade-in">
             </div>
 
